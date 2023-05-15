@@ -3,30 +3,40 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 class AuthController extends Controller
 {
      public function register(Request $request){
+       try{
         $request->validate([
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:6|max:20',
         ]);
 
-        $user = new User([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => Hash::make($request->password)
         ]);
-
-         $user->save();
+        
+        $user->sendEmailVerificationNotification();
+            
+        // return redirect()->to('/verify-view')->with('success', 'Email verifikasi telah dikirim!');
          return response()->json([
              'user' => $user,
              'message' => 'Berhasil Daftar!',
          ], 201);
-        
+       } catch (\Exception $e) {
+           return response()->json([
+               'message' => 'Gagal Daftar!',
+               'error' => $e->getMessage()
+           ], 409);
+       }
     }
 
     public function login(Request $request){
@@ -56,7 +66,7 @@ class AuthController extends Controller
             'user' => $user,
             'token' => $token
         ];
-
+        // return redirect()->to('/')->with('success', 'Berhasil Login!');
         return response()->json($response, 200);
     }
 

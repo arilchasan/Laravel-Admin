@@ -8,15 +8,10 @@
                     <span>Admin</span>
                 </li>
                 <li class="submenu">
-                    <a href="#"><i class="la la-dashboard"></i> <span> Dashboard</span> <span class="menu-arrow"></span></a>
-                    <ul style="display: none;">
-                        <li><a class="" href="{{ route('dashboard/page') }}">Admin Dashboard</a></li>
-                        <li><a href="{{ route('dashboard/data') }}">Data</a></li>
-                    </ul>
+                    <li><a href="{{ route('dashboard/page') }}"><i class="la la-dashboard"></i> <span> Dashboard</span></a></li>
                 </li>
                 <li class="submenu">
-                    <a href='dashboard/data'><i class="la la-dashboard"></i> <span> Data</span></a>
-                    
+                    <li><a href='{{route('dashboard/data')}}'><i class="la la-dashboard"></i> <span> Data</span></a></li>    
                 </li>
 
                 
