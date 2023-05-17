@@ -16,7 +16,7 @@ class Destinasi extends Model
         'foto',
         'deskripsi',
         'jenis',
-        'kuliner'
+        
 
         
     ];
@@ -25,6 +25,7 @@ class Destinasi extends Model
         'created_at',
         'updated_at'
     ];
+    protected $guarded = ['id'];
 
     protected $table = 'destinasis';
 

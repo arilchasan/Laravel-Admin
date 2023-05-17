@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\DestinasiStoreRequest;
 use App\Models\Destinasi;
+use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -30,6 +31,12 @@ class DestinasiController extends Controller
                 'data' => $destinasi
             ], 404);
         }
+        return view('/dashboard/data', ['destinasi' => $destinasi]);
+        
+    }
+    public function create()
+    {
+        return view('/dashboard/create');
     }
 
     public function store(Request $request)
@@ -40,7 +47,7 @@ class DestinasiController extends Controller
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'deskripsi' => 'required',
             'jenis' => 'required',
-            'kuliner' => 'required'
+           
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -60,7 +67,7 @@ class DestinasiController extends Controller
                 'foto' => $image_name,
                 'deskripsi' => $request->deskripsi,
                 'jenis'=> $request->jenis,
-                'kuliner'=> $request->kuliner
+                
             ]);
             if ($destinasi) {
                 return response()->json([
@@ -76,6 +83,8 @@ class DestinasiController extends Controller
                 ], 400);
             }
         }
+        Destinasi::create($validator);
+        return redirect()->route('dashboard/data');
     }
     public function show($id)
     {

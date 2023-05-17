@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\DestinasiController;
 use App\Http\Controllers\FormController;
+use App\Models\Destinasi;
 use Illuminate\Support\Facades\Request;
 
 /*
@@ -37,5 +39,8 @@ Route::controller(HomeController::class)->group(function () {
 
 Route::prefix('dashboard')->group(function () {
     Route::get('/data', [HomeController::class, 'data'])->name('dashboard/data');
+    Route::post('/add', [DestinasiController::class, 'store']);
+    Route::get('create', [DestinasiController::class, 'create']);
 });
+
 
