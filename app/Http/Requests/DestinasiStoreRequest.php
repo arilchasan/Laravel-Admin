@@ -30,14 +30,18 @@ class DestinasiStoreRequest extends FormRequest
             'nama' => 'required',
             'alamat' => 'required',
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'deskripsi' => 'required'
+            'deskripsi' => 'required',
+            'jenis' => 'required',
+            'kuliner' => 'required'
          ];
        } else {
          return [
             'nama' => 'required',
             'alamat' => 'required',
             'foto' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'deskripsi' => 'required'
+            'deskripsi' => 'required',
+            'jenis' => 'required',
+            'kuliner' => 'required'
          ];
        }
     }

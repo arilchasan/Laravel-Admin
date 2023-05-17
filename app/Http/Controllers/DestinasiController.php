@@ -39,6 +39,8 @@ class DestinasiController extends Controller
             'alamat' => 'required',
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'deskripsi' => 'required',
+            'jenis' => 'required',
+            'kuliner' => 'required'
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -57,6 +59,8 @@ class DestinasiController extends Controller
                 'alamat' => $request->alamat,
                 'foto' => $image_name,
                 'deskripsi' => $request->deskripsi,
+                'jenis'=> $request->jenis,
+                'kuliner'=> $request->kuliner
             ]);
             if ($destinasi) {
                 return response()->json([
@@ -98,6 +102,8 @@ class DestinasiController extends Controller
             'alamat' => 'required',
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'deskripsi' => 'required',
+            'jenis' => 'required',
+            'kuliner' => 'required'
         ]);
     
         if ($validator->fails()) {
@@ -132,6 +138,8 @@ class DestinasiController extends Controller
                 'alamat' => $request->alamat,
                 'foto' => $image_name,
                 'deskripsi' => $request->deskripsi,
+                'jenis' => $request->jenis,
+                'kuliner' => $request->kuliner,
             ]);
     
             if ($destinasi) {

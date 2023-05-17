@@ -18,7 +18,12 @@ return new class extends Migration
             $table->string('nama');
             $table->string('alamat');
             $table->string('foto');
-            $table->string('deskripsi');            
+            $table->string('deskripsi');
+            $table->string('Lokasi');
+            $table->string('jenis');
+            $table->string('kuliner');
+            
+
             $table->timestamps();
         });
     }
