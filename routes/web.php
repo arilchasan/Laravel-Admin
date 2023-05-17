@@ -3,7 +3,9 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\DestinasiController;
 use App\Http\Controllers\FormController;
+use App\Models\Destinasi;
 use App\Http\Controllers\VerificationController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
@@ -40,7 +42,11 @@ Route::controller(HomeController::class)->group(function () {
 
 Route::prefix('dashboard')->group(function () {
     Route::get('/data', [HomeController::class, 'data'])->name('dashboard/data');
+    Route::post('/add', [DestinasiController::class, 'store']);
+    Route::get('create', [DestinasiController::class, 'create']);
 });
+
+
 
 Auth::routes(['verify' => true]);
 Route::get('/email/verify/{id}', [VerificationController::class, 'verify'])->name('verification.verify');
@@ -51,4 +57,5 @@ Auth::routes();
 Route::get('/verify-view', [HomeController::class, 'verifyview'])->name('verifyview');
 Route::get('/login', [HomeController::class, 'login'])->name('login');
 Route::get('/login/add', [AuthController::class, 'login'])->name('loginadd');
+
 

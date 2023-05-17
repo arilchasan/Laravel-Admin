@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Destinasi;
 
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ class HomeController extends Controller
         return view('dashboard.dashboard');
     }
     public function data () {
-        return view('dashboard.data');
+        return view('dashboard.data',['destinasi' => Destinasi::all()]);
     }
 
     /** index page register */
