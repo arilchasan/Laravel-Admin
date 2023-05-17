@@ -30,6 +30,9 @@
                 <th><h5>nama</h5></th>
                 <th><h5>alamat</h5></th>
                 <th><h5>Foto</h5></th>
+                <th><h5>Foto2</h5></th>
+                <th><h5>Foto3</h5></th>
+                <th><h5>Foto4</h5></th>
                 <th><h5>Deskripsi</h5></th>
                 <th><h5>Jenis</h5></th>
                 <th><h5>Aksi</h5></th>
@@ -48,6 +51,9 @@
                     <th>{{  $data->nama }}</li>
                     <th>{{ $data->alamat }}</li>
                     <th>{{ $data->foto }}</li>
+                    <th>{{ $data->foto2 }}</li>
+                    <th>{{ $data->foto3 }}</li>
+                    <th>{{ $data->foto4 }}</li>
                     <th>{{ $data->deskrisi }}</li>
                     <th>{{ $data->jenis }}</li>
                     <td>
