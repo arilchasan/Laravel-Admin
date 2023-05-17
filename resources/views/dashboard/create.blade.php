@@ -1,11 +1,9 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="page-wrapper">
-    <div class="content container-fluid">
-        <div class="page-header">
-            <div class="content">
-                <h1 align="center">Tambah Data Wisata</h1>
+
+<div class="create-container">
+                <h2 align="center">Tambah Data Wisata</h2>
                 <form action="/dashboard/add" method="post">
                 @csrf
                 <div class="form-group">
@@ -46,10 +44,8 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
-            </div>
+        
 
-</div>
-</div>
 </div>
 
 @endsection

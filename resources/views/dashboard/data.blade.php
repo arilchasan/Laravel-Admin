@@ -26,9 +26,9 @@
     <table class="table table-light table-striped text-left " >
 
             <tr class="text-center"> 
-                <th><h5>id</h5></th>
-                <th><h5>nama</h5></th>
-                <th><h5>alamat</h5></th>
+                <th><h5>ID</h5></th>
+                <th><h5>Nama</h5></th>
+                <th><h5>Alamat</h5></th>
                 <th><h5>Foto</h5></th>
                 <th><h5>Foto2</h5></th>
                 <th><h5>Foto3</h5></th>
