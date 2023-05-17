@@ -93,4 +93,21 @@ class AuthController extends Controller
             ], 404);
         }
     }
+    public function destroy($id) 
+    {
+        $user = User::find($id);  
+        if (!$user) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Data tidak ditemukan',
+            ], 404);
+        } else {
+            $user->delete();
+            return response()->json([
+                'status' => 200,
+                'message' => 'Berhasil menghapus data',
+                'data' => $user
+            ], 200);
+        }
+    }
 }
