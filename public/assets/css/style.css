@@ -1952,13 +1952,20 @@ table.dataTable thead>tr>td.sorting {
     transition: all .2s ease-in-out
 }
 
-.create-container{
-    left: 0;
+.create-container {
+    /* padding: 5vh; */
+    margin-top: 7%;
+    /* background-color: #722525; */
+    height: 69vh;
     margin-left: 30vh;
-    margin-top: 100px;
-    padding: 5vh;
-    height: 70vh;
+    width: 165vh;
     overflow-y: scroll;
+    position: relative;
+
+}
+
+.create-content{
+    padding: 8vh;
 }
 
 .page-wrapper>.content {

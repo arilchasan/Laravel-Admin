@@ -24,7 +24,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->password)
         ]);
         
-        // $user->sendEmailVerificationNotification();
+        $user->sendEmailVerificationNotification();
             
         // return redirect()->to('/verify-view')->with('success', 'Email verifikasi telah dikirim!');
          return response()->json([
