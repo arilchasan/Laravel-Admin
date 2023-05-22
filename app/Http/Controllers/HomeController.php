@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Destinasi;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -14,5 +15,23 @@ class HomeController extends Controller
     }
     public function data () {
         return view('dashboard.data',['destinasi' => Destinasi::all()]);
+    }
+
+    /** index page register */
+    public function register()
+    {
+        return view('user.register',['user' => User::all()]);
+    }
+
+    /** index page login */
+    public function login()
+    {
+        return view('user.login',['user' => User::all()]);
+    }
+
+    /** index page verify */
+    public function verifyview()
+    {
+        return view('auth.verify',['data_user' => User::all()]);
     }
 }
