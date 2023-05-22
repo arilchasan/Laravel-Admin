@@ -21,10 +21,7 @@
         <div class="content container-fluid">
             <div class="page-header">
     <h3 class="text-center" style="margin-top: 30px;font-weight:bold">Daftar</h3>
-
-    
     <table class="table table-light table-striped text-left " >
-
             <tr class="text-center"> 
                 <th><h5>id</h5></th>
                 <th><h5>nama</h5></th>
@@ -44,8 +41,6 @@
             <div class="col-lg-7">
                 <a  class="btn btn-outline-primary" href="/dashboard/create">Tambah Data</a>
             </div>
-        
-       
                 <tr class="text-center">
                    @foreach ( $destinasi as $data )
                     <th>{{  $data->nama }}</li>
@@ -65,5 +60,4 @@
         </tbody>
     </table>
                     {{-- {{ $data->links('pagination::bootstrap-5')}}  --}}
-
 @endsection
