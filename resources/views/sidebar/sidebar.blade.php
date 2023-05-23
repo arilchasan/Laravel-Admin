@@ -11,7 +11,10 @@
                     <li><a href="{{ route('dashboard/page') }}"><i class="la la-dashboard"></i> <span> Dashboard</span></a></li>
                 </li>
                 <li class="submenu">
-                    <li><a href='{{route('dashboard/data')}}'><i class="la la-dashboard"></i> <span> Data</span></a></li>    
+                    <li><a href='{{route('dashboard/data')}}'><i class="la la-bar-chart"></i> <span> Destinasi</span></a></li>    
+                </li>
+                <li class="submenu">
+                    <li><a href='/dashboard/peta/all'><i class="la la-map"></i> <span> Peta</span></a></li>    
                 </li>
 
                 

@@ -1492,8 +1492,15 @@ table.dataTable thead>tr>td.sorting {
 }
 
 .header .header-left .logo {
-    display: inline-block;
-    line-height: 60px
+    /* display: inline-block;
+    line-height: 60px */
+}
+
+.logo {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    height: 70px;
 }
 
 .bar-icon {

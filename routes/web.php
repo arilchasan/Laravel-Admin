@@ -1,14 +1,15 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\DestinasiController;
-use App\Http\Controllers\FormController;
 use App\Models\Destinasi;
-use App\Http\Controllers\VerificationController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Request;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FormController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PetaController;
+use App\Http\Controllers\DestinasiController;
+use App\Http\Controllers\VerificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,8 +43,18 @@ Route::controller(HomeController::class)->group(function () {
 
 Route::prefix('dashboard')->group(function () {
     Route::get('/data', [HomeController::class, 'data'])->name('dashboard/data');
+    Route::prefix('/peta')->group(function () {
+        Route::get('/all', [PetaController::class, 'index']);
+        Route::get('/detail/{id}', [PetaController::class, 'show']);
+        Route::get('/create', [PetaController::class, 'create']);
+        Route::get('/edit/{id}', [PetaController::class, 'edit']);
+        Route::post('/add', [PetaController::class, 'store']);
+        Route::post('/update/{id}', [PetaController::class, 'update']);
+        Route::delete('/destroy/{id}', [PetaController::class, 'destroy']);
+    });
     Route::post('/add', [DestinasiController::class, 'store']);
     Route::get('create', [DestinasiController::class, 'create']);
+
 });
 
 

@@ -5,9 +5,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <title>Dashboard Admin</title>
+    <title>Dashboard Admin North Expo</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="{{ URL::to('assets/img/favicon.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ URL::to('assets/img/logo-light.png') }}">
     <link rel="stylesheet" href="{{ URL::to('assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ URL::to('assets/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ URL::to('assets/css/line-awesome.min.css') }}">
@@ -42,19 +42,19 @@
 		</div>
 		<!-- /Loader -->
         <div class="header">
-            <div class="header-left">
+            <div class="header-left" >
                 <a href="{{ route('/') }}" class="logo">
-                    <img src="{{ URL::to('assets/img/logo.png') }}" width="40" height="40" alt="">
+                    <img src="{{ URL::to('assets/img/logo-dark.png') }}" width="110" height="110" alt="">
                 </a>
             </div>
 
-            <a id="toggle_btn" href="javascript:void(0);">
+            {{-- <a id="toggle_btn" href="javascript:void(0);">
                 <span class="bar-icon">
                     <span></span>
                     <span></span>
                     <span></span>
                 </span>
-            </a>
+            </a> --}}
 
             
          
