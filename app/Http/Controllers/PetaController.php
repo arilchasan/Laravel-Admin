@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class PetaController extends Controller
 {
@@ -148,6 +149,7 @@ class PetaController extends Controller
                 $image = $request->file('gambar');
                 $image_name = Str::random(10) . '.' . $image->getClientOriginalExtension();
                 $image->move(public_path('/peta'), $image_name);
+                Storage::put('/public/peta/', $image_name);
             }
 
             $allpeta->update([

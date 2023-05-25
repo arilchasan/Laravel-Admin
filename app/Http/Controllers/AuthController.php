@@ -97,17 +97,24 @@ class AuthController extends Controller
     {
         $user = User::find($id);  
         if (!$user) {
+            return redirect()->to('/dashboard/userlogin/all')->with('error', 'Data tidak ditemukan');
             return response()->json([
                 'status' => 404,
                 'message' => 'Data tidak ditemukan',
             ], 404);
         } else {
             $user->delete();
+            return redirect()->to('/dashboard/userlogin/all')->with('success', 'Berhasil menghapus data');
             return response()->json([
                 'status' => 200,
                 'message' => 'Berhasil menghapus data',
                 'data' => $user
             ], 200);
         }
+    }
+
+    public function userall() 
+    {
+        return view('dashboard.userlogin.index',['user' => User::all()]);
     }
 }

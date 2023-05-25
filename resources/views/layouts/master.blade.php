@@ -28,7 +28,7 @@
 
 <body>
 
-    <div class="main-wrapper">
+    <div class="main-wrapper" style="overflow: scroll;">
 		<!-- Loader -->
 		<div id="loader-wrapper">
 			<div id="loader">
@@ -44,7 +44,7 @@
         <div class="header">
             <div class="header-left" >
                 <a href="{{ route('/') }}" class="logo">
-                    <img src="{{ URL::to('assets/img/logo-dark.png') }}" width="110" height="110" alt="">
+                    <img src="{{ URL::to('assets/img/logo-dark.png') }}" width="120" height="120" alt="">
                 </a>
             </div>
 
@@ -55,6 +55,17 @@
                     <span></span>
                 </span>
             </a> --}}
+            {{-- <div class="menu" style="padding: 2vh">
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">=
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                          <li><a href="#">HTML</a></li>
+                          <li><a href="#">CSS</a></li>
+                          <li><a href="#">JavaScript</a></li>
+                        </ul>
+                </div>
+            </div> --}}
 
             
          
@@ -69,14 +80,14 @@
         </div> --}}
 
        <!-- Sidebar -->
-		@include('sidebar.sidebar')
-		<!-- /Sidebar -->
-
-		<!-- Page Wrapper -->
-		@yield('content')
-		<!-- /Page Wrapper -->
+       @include('sidebar.sidebar')
+       <!-- /Sidebar -->
+       
+       <!-- Page Wrapper -->
+       @yield('content')
+       <!-- /Page Wrapper -->
     </div>
-
+    
     <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script src="{{ URL::to('assets/js/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ URL::to('assets/js/popper.min.js') }}"></script>

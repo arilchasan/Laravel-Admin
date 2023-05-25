@@ -2,7 +2,8 @@
 
 @section('content')
 <div class="create-container">
-        <div class="create-content">
+    <div class="content container-fluid">
+        <div class="content-container">
                 <h1 align="center">Tambah Data Peta</h1>
                 <form action="/dashboard/peta/add" method="post" enctype="multipart/form-data">
                 @csrf
@@ -33,12 +34,12 @@
               
                 <div class="row">
                     <button type="submit" class="btn btn-primary">Submit</button>
-                    <a href="/peta/all" type="button" class="btn btn-secondary mx-2" >Kembali</a>
+                    <a href="/dashboard/peta/all" type="button" class="btn btn-secondary mx-2" >Kembali</a>
 
                 </div>
             </form>
         </div>
-           
+    </div>
 </div>
 
 @endsection
