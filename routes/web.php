@@ -1,14 +1,15 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\DestinasiController;
-use App\Http\Controllers\FormController;
 use App\Models\Destinasi;
-use App\Http\Controllers\VerificationController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Request;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FormController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PetaController;
+use App\Http\Controllers\DestinasiController;
+use App\Http\Controllers\VerificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,15 +36,30 @@ Route::get('/', function () {
 
 // ----------------------------- main dashboard ------------------------------//
 Route::controller(HomeController::class)->group(function () {
-    Route::get('dashboard/page', 'index')->name('dashboard/page');
     
     // Route::get('dashboard/data', 'data')->name('dashboard/data');
 });
 
 Route::prefix('dashboard')->group(function () {
+    Route::get('/page', [HomeController::class, 'index'])->name('dashboard/page');
     Route::get('/data', [HomeController::class, 'data'])->name('dashboard/data');
+    //prefix peta
+    Route::prefix('/peta')->group(function () {
+        Route::get('/all', [PetaController::class, 'index']);
+        Route::get('/detail/{id}', [PetaController::class, 'show']);
+        Route::get('/create', [PetaController::class, 'create']);
+        Route::get('/edit/{id}', [PetaController::class, 'edit']);
+        Route::post('/add', [PetaController::class, 'store']);
+        Route::post('/update/{id}', [PetaController::class, 'update']);
+        Route::delete('/destroy/{id}', [PetaController::class, 'destroy']);
+    });
     Route::post('/add', [DestinasiController::class, 'store']);
     Route::get('create', [DestinasiController::class, 'create']);
+    //prefix userlogin
+    Route::prefix('/userlogin')->group( function(){
+        Route::get('/all', [AuthController::class, 'userall']);
+        Route::delete('/destroy/{id}', [AuthController::class, 'destroy']);
+    });
 });
 
 
@@ -52,7 +68,7 @@ Auth::routes(['verify' => true]);
 Route::get('/email/verify/{id}', [VerificationController::class, 'verify'])->name('verification.verify');
 // Route::get('/register', [HomeController::class, 'register'])->name('register');
 Route::get('/daftar', [HomeController::class, 'register'])->name('daftar');
-Route::post('/register/add', [AuthController::class, 'register'])->name('register/add');
+Route::post('/daftar/add', [AuthController::class, 'register'])->name('daftar/add');
 Auth::routes();
 Route::get('/verify-view', [HomeController::class, 'verifyview'])->name('verifyview');
 Route::get('/login', [HomeController::class, 'login'])->name('login');

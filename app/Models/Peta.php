@@ -4,21 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
 
-class Destinasi extends Model
+class Peta extends Model
 {
     use HasFactory;
-
     protected $fillable = [
+        'latitude',
+        'longitude',
+        'kategori',
         'nama',
         'alamat',
-        'foto',
-        'foto2',
-        'foto3',
-        'foto4',
-        'deskripsi',
-        'jenis',
+        'gambar'
     ];
 
     protected $hidden = [
@@ -26,7 +22,5 @@ class Destinasi extends Model
         'updated_at'
     ];
     protected $guarded = ['id'];
-
-    protected $table = 'destinasis';
-
+    protected $table = 'petas';
 }

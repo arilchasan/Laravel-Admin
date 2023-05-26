@@ -1,10 +1,8 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="page-wrapper ">
-    <div class="content container-fluid">
-        <div class="page-header">
-            <div class="content">
+<div class="create-container">
+        <div class="create-content">
                 <h1 align="center">Tambah Data Wisata</h1>
                 <form action="/dashboard/add" method="post">
                 @csrf
@@ -44,12 +42,14 @@
                     <label for="jenis">Jenis Wisata</label>
                     <input type="text" class="form-control" id="jenis" name="jenis" value="{{ old('jenis') }}" placeholder="Masukkan Jenis Wisata" width=50% height=50%>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-            </div>
+                <div class="row">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a href="/dashboard/data" type="button" class="btn btn-secondary mx-2" >Kembali</a>
 
-</div>
-</div>
+                </div>
+            </form>
+        </div>
+           
 </div>
 
 @endsection
