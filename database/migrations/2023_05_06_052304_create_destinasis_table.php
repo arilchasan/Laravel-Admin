@@ -22,7 +22,10 @@ return new class extends Migration
             $table->string('foto3');
             $table->string('foto4');
             $table->string('deskripsi');
-            $table->string('jenis');            
+            $table->string('Lokasi');
+            $table->string('jenis');
+            $table->string('kuliner');
+            
 
             $table->timestamps();
         });

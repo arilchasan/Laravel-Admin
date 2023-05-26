@@ -5,9 +5,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <title>Dashboard Admin North Expo</title>
+    <title>Dashboard Admin</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="{{ URL::to('assets/img/logo-light.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ URL::to('assets/img/favicon.png') }}">
     <link rel="stylesheet" href="{{ URL::to('assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ URL::to('assets/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ URL::to('assets/css/line-awesome.min.css') }}">
@@ -28,7 +28,7 @@
 
 <body>
 
-    <div class="main-wrapper" style="overflow: scroll;">
+    <div class="main-wrapper">
 		<!-- Loader -->
 		<div id="loader-wrapper">
 			<div id="loader">
@@ -42,30 +42,19 @@
 		</div>
 		<!-- /Loader -->
         <div class="header">
-            <div class="header-left" >
+            <div class="header-left">
                 <a href="{{ route('/') }}" class="logo">
-                    <img src="{{ URL::to('assets/img/logo-dark.png') }}" width="120" height="120" alt="">
+                    <img src="{{ URL::to('assets/img/logo.png') }}" width="40" height="40" alt="">
                 </a>
             </div>
 
-            {{-- <a id="toggle_btn" href="javascript:void(0);">
+            <a id="toggle_btn" href="javascript:void(0);">
                 <span class="bar-icon">
                     <span></span>
                     <span></span>
                     <span></span>
                 </span>
-            </a> --}}
-            {{-- <div class="menu" style="padding: 2vh">
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">=
-                        <span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                          <li><a href="#">HTML</a></li>
-                          <li><a href="#">CSS</a></li>
-                          <li><a href="#">JavaScript</a></li>
-                        </ul>
-                </div>
-            </div> --}}
+            </a>
 
             
          
@@ -80,14 +69,14 @@
         </div> --}}
 
        <!-- Sidebar -->
-       @include('sidebar.sidebar')
-       <!-- /Sidebar -->
-       
-       <!-- Page Wrapper -->
-       @yield('content')
-       <!-- /Page Wrapper -->
+		@include('sidebar.sidebar')
+		<!-- /Sidebar -->
+
+		<!-- Page Wrapper -->
+		@yield('content')
+		<!-- /Page Wrapper -->
     </div>
-    
+
     <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script src="{{ URL::to('assets/js/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ URL::to('assets/js/popper.min.js') }}"></script>

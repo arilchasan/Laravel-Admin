@@ -29,11 +29,11 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         VerifyEmail::toMailUsing(function ($notifiable, $url) {
-            $mail = "Hi, $notifiable->name! Klik link berikut untuk verifikasi email. $url";
+            $mail = "Hi, $notifiable->name! Click the link below to verify your email address. $url";
             return (new MailMessage)
-                ->subject('Verifikasi Alamat Email')
+                ->subject('Verify Email Address')
                 ->line($mail)
-                ->action('Verifikasi Email', $url);
+                ->action('Verify Email Address', $url);
                 //url bisa diganti dengan link frontend
         }); 
          

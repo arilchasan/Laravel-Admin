@@ -14,11 +14,11 @@ class Destinasi extends Model
         'nama',
         'alamat',
         'foto',
-        'foto2',
-        'foto3',
-        'foto4',
         'deskripsi',
         'jenis',
+        
+
+        
     ];
 
     protected $hidden = [

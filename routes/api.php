@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\PetaController;
 use App\Http\Controllers\DestinasiController;
 use App\Http\Controllers\VerificationController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +37,3 @@ Route::delete('/destinasi/{id}', [DestinasiController::class, 'destroy']);
 Route::get('email/verify/{id}', [VerificationController::class, 'verify'])->name('verification.verify');
 Route::post('email/send', [VerificationController::class, 'sendVerificationEmail'])->name('verification.send');
 
-Route::get('/peta',[PetaController::class,'get']);
-Route::post('/peta',[PetaController::class,'store']);
-Route::post('/peta/{id}',[PetaController::class,'update']);
-Route::delete('/peta/{id}',[PetaController::class,'destroy']);
