@@ -52,6 +52,8 @@ class DestinasiController extends Controller
             'foto4' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'deskripsi' => 'required',
             'jenis' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
            
         ]);
         if ($validator->fails()) {
@@ -88,6 +90,8 @@ class DestinasiController extends Controller
                 'foto4' => $image_name4,
                 'deskripsi' => $request->deskripsi,
                 'jenis'=> $request->jenis,
+                'latitude' => $request->latitude,
+                'longitude' => $request->longitude,
                 
             ]);
             if ($destinasi) {
@@ -144,6 +148,8 @@ class DestinasiController extends Controller
             'foto4' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'deskripsi' => 'required',
             'jenis' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
         ]);
     
         if ($validator->fails()) {
@@ -206,6 +212,8 @@ class DestinasiController extends Controller
                 'foto4' => $image_name4,
                 'deskripsi' => $request->deskripsi,
                 'jenis' => $request->jenis,
+                'latitude' => $request->latitude,
+                'longitude' => $request->longitude,
             ]);
     
             if ($destinasi) {

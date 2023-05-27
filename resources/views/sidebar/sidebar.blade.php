@@ -13,9 +13,9 @@
                 <li class="submenu">
                     <li><a href='/dashboard/destinasi/all'><i class="la la-bar-chart"></i> <span> Destinasi</span></a></li>    
                 </li>
-                <li class="submenu">
+                {{-- <li class="submenu">
                     <li><a href='/dashboard/peta/all'><i class="la la-map"></i> <span> Peta</span></a></li>    
-                </li>
+                </li> --}}
                 <li class="submenu">
                     <li><a href='/dashboard/userlogin/all'><i class="la la-user"></i> <span> User Login</span></a></li>    
                 </li>

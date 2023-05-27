@@ -23,7 +23,9 @@ return new class extends Migration
             $table->string('foto4');
             $table->text('deskripsi');
             $table->string('jenis');            
-
+            $table->decimal('latitude', 10, 8);
+            $table->decimal('longitude', 11, 8);
+            
             $table->timestamps();
         });
     }

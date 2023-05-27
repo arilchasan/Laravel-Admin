@@ -19,6 +19,8 @@ class Destinasi extends Model
         'foto4',
         'deskripsi',
         'jenis',
+        'latitude',
+        'longitude',
     ];
 
     protected $hidden = [

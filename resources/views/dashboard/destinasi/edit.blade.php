@@ -10,9 +10,21 @@
                 <div class="row">
 
             
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <label class="label" for="nama">Nama Wisata</label>
                     <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama',$destinasi->nama) }}" >
+                </div>
+                <div class="col-md-6">
+                    <label class="label" for="jenis">Kategori Wisata</label>
+                    <input type="text" class="form-control" id="jenis" name="jenis" required value="{{ old('jenis',$destinasi->jenis) }}">
+                </div>
+                <div class="col-md-6">
+                    <label class="label" for="latitude">Latitude</label>
+                    <input type="text" class="form-control" id="latitude" name="latitude" required value="{{ old('latitude',$destinasi->latitude) }}">
+                </div>
+                <div class="col-md-6">
+                    <label class="label" for="longitude">Longitude</label>
+                    <input type="text" class="form-control" id="longitude" name="longitude" required value="{{ old('longitude',$destinasi->longitude) }}">
                 </div>
                 <div class="col-md-12">
                     <label class="label" for="alamat">Lokasi Wisata</label>
@@ -45,12 +57,9 @@
             
                 <div class="col-md-12">
                     <label class="label" for="deskripsi">Deskripsi Wisata</label>
-                    <input type="text" class="form-control" id="deskripsi" name="deskripsi" required value="{{ old('deskripsi',$destinasi->deskripsi) }}">
+                    <textarea type="text" class="form-control" id="deskripsi" name="deskripsi" required value="{{ old('deskripsi',$destinasi->deskripsi) }}"> {{ old('deskripsi',$destinasi->deskripsi) }} </textarea>
                 </div>
-                <div class="col-md-12">
-                    <label class="label" for="jenis">Jenis Wisata</label>
-                    <input type="text" class="form-control" id="jenis" name="jenis" required value="{{ old('jenis',$destinasi->jenis) }}">
-                </div>
+              
                 <br>
                 <br>
                 <div class="col-md-12 mt-2">
