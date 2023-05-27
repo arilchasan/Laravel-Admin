@@ -31,12 +31,14 @@ class DestinasiController extends Controller
                 'data' => $destinasi
             ], 404);
         }
-        return view('/dashboard/data', ['destinasi' => $destinasi]);
-        
+    }
+    public function all()
+    {
+        return view ('/dashboard/destinasi/destinasi',['destinasi' => Destinasi::all()]);    
     }
     public function create()
     {
-        return view('/dashboard/create');
+        return view('/dashboard/destinasi/create');
     }
 
     public function store(Request $request)
@@ -53,6 +55,7 @@ class DestinasiController extends Controller
            
         ]);
         if ($validator->fails()) {
+            return redirect('/dashboard/destinasi/all')->with('error', 'Terjadi kesalahan');
             return response()->json([
                 'status' => 400,
                 'message' => 'Terjadi kesalahan',
@@ -88,12 +91,14 @@ class DestinasiController extends Controller
                 
             ]);
             if ($destinasi) {
+                return redirect('/dashboard/destinasi/all')->with('success', 'Berhasil menambahkan data');
                 return response()->json([
                     'status' => 200,
                     'message' => 'Berhasil menambahkan data',
                     'data' => $destinasi                    
                 ], 200);
             } else {
+                return redirect('/dashboard/destinasi/all')->with('error', 'Gagal menambahkan data');
                 return response()->json([
                     'status' => 400,
                     'message' => 'Gagal menambahkan data',
@@ -102,11 +107,11 @@ class DestinasiController extends Controller
             }
         }
         Destinasi::create($validator);
-        return redirect()->route('dashboard/data');
     }
 
     public function show($id)
     {
+        return view('dashboard.destinasi.detail', ['destinasi' => Destinasi::find($id)]);
         $destinasi = Destinasi::find($id);
         if ($destinasi) {
             return response()->json([
@@ -121,6 +126,11 @@ class DestinasiController extends Controller
                 'data' => $destinasi
             ], 404);
         }
+    }
+
+    public function edit($id) 
+    {
+        return view('dashboard.destinasi.edit', ['destinasi' => Destinasi::find($id)]);
     }
 
     public function update(int $id, Request $request)
@@ -199,12 +209,14 @@ class DestinasiController extends Controller
             ]);
     
             if ($destinasi) {
+                return redirect('/dashboard/destinasi/all')->with('success', 'Berhasil mengupdate data');
                 return response()->json([
                     'status' => 200,
                     'message' => 'Berhasil mengupdate data',
                     'data' => $destinasi
                 ], 200);
             } else {
+                return redirect('/dashboard/destinasi/all')->with('error', 'Gagal mengupdate data');
                 return response()->json([
                     'status' => 400,
                     'message' => 'Gagal mengupdate data',
@@ -219,6 +231,7 @@ class DestinasiController extends Controller
     {
         $destinasi = Destinasi::find($id);  
         if (!$destinasi) {
+            return redirect('/dashboard/destinasi/all')->with('error', 'Data tidak ditemukan');
             return response()->json([
                 'status' => 404,
                 'message' => 'Data tidak ditemukan',
@@ -229,6 +242,7 @@ class DestinasiController extends Controller
             File::delete(public_path('foto/' . $destinasi->foto3));
             File::delete(public_path('foto/' . $destinasi->foto4));
             $destinasi->delete();
+            return redirect('/dashboard/destinasi/all')->with('success', 'Berhasil menghapus data');
             return response()->json([
                 'status' => 200,
                 'message' => 'Berhasil menghapus data',

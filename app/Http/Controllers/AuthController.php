@@ -93,6 +93,7 @@ class AuthController extends Controller
             ], 404);
         }
     }
+    
     public function destroy($id) 
     {
         $user = User::find($id);  

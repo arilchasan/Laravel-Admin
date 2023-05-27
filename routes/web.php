@@ -42,7 +42,16 @@ Route::controller(HomeController::class)->group(function () {
 
 Route::prefix('dashboard')->group(function () {
     Route::get('/page', [HomeController::class, 'index'])->name('dashboard/page');
-    Route::get('/data', [HomeController::class, 'data'])->name('dashboard/data');
+    //prefix destinasi
+    Route::prefix('/destinasi')->group(function () {
+        Route::get('/all', [DestinasiController::class, 'all']);
+        Route::get('/detail/{id}', [DestinasiController::class, 'show']);
+        Route::get('/create', [DestinasiController::class, 'create']);
+        Route::get('/edit/{id}', [DestinasiController::class, 'edit']);
+        Route::post('/add', [DestinasiController::class, 'store']);
+        Route::post('/update/{id}', [DestinasiController::class, 'update']);
+        Route::delete('/destroy/{id}', [DestinasiController::class, 'destroy']);
+    });
     //prefix peta
     Route::prefix('/peta')->group(function () {
         Route::get('/all', [PetaController::class, 'index']);
@@ -53,8 +62,7 @@ Route::prefix('dashboard')->group(function () {
         Route::post('/update/{id}', [PetaController::class, 'update']);
         Route::delete('/destroy/{id}', [PetaController::class, 'destroy']);
     });
-    Route::post('/add', [DestinasiController::class, 'store']);
-    Route::get('create', [DestinasiController::class, 'create']);
+
     //prefix userlogin
     Route::prefix('/userlogin')->group( function(){
         Route::get('/all', [AuthController::class, 'userall']);
