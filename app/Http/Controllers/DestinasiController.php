@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\DestinasiStoreRequest;
+use App\Models\Kategori;
 use App\Models\Destinasi;
-use GuzzleHttp\Promise\Create;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use GuzzleHttp\Promise\Create;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
+use App\Http\Requests\DestinasiStoreRequest;
 
 class DestinasiController extends Controller
 {
@@ -17,7 +18,7 @@ class DestinasiController extends Controller
     public function index()
     {
 
-        $destinasi = Destinasi::all();
+        $destinasi = Destinasi::with('kategori')->get();
         if ($destinasi->count() > 0) {
             return response()->json([
                 'status' => 200,
@@ -38,7 +39,7 @@ class DestinasiController extends Controller
     }
     public function create()
     {
-        return view('/dashboard/destinasi/create');
+        return view('/dashboard/destinasi/create',['kategori' => Kategori::all()]);
     }
 
     public function store(Request $request)
@@ -46,14 +47,16 @@ class DestinasiController extends Controller
         $validator = Validator::make($request->all(), [
             'nama' => 'required',
             'alamat' => 'required',
-            'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'foto2' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'foto3' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'foto4' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            'foto2' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            'foto3' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            'foto4' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
             'deskripsi' => 'required',
-            'jenis' => 'required',
+            'kategori_id' => 'required',
             'latitude' => 'required',
             'longitude' => 'required',
+            'maps' => 'required',
+            'operasional' => 'required',
            
         ]);
         if ($validator->fails()) {
@@ -89,9 +92,11 @@ class DestinasiController extends Controller
                 'foto3' => $image_name3,
                 'foto4' => $image_name4,
                 'deskripsi' => $request->deskripsi,
-                'jenis'=> $request->jenis,
+                'kategori_id' => $request->kategori_id,
                 'latitude' => $request->latitude,
                 'longitude' => $request->longitude,
+                'maps' => $request->maps,
+                'operasional' => $request->operasional,
                 
             ]);
             if ($destinasi) {
@@ -115,7 +120,7 @@ class DestinasiController extends Controller
 
     public function show($id)
     {
-        return view('dashboard.destinasi.detail', ['destinasi' => Destinasi::find($id)]);
+        return view('dashboard.destinasi.detail', ['destinasi' => Destinasi::find($id)], ['kategori' => Kategori::all()]);
         $destinasi = Destinasi::find($id);
         if ($destinasi) {
             return response()->json([
@@ -134,7 +139,7 @@ class DestinasiController extends Controller
 
     public function edit($id) 
     {
-        return view('dashboard.destinasi.edit', ['destinasi' => Destinasi::find($id)]);
+        return view('dashboard.destinasi.edit', ['destinasi' => Destinasi::find($id)], ['kategori' => Kategori::all()]);
     }
 
     public function update(int $id, Request $request)
@@ -142,14 +147,17 @@ class DestinasiController extends Controller
         $validator = Validator::make($request->all(), [
             'nama' => 'required',
             'alamat' => 'required',
-            'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'foto2' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'foto3' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'foto4' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            'foto2' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            'foto3' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            'foto4' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
             'deskripsi' => 'required',
-            'jenis' => 'required',
+            'kategori_id' => 'required',
             'latitude' => 'required',
             'longitude' => 'required',
+            'maps' => 'required',
+            'operasional' => 'required',
+            
         ]);
     
         if ($validator->fails()) {
@@ -211,9 +219,11 @@ class DestinasiController extends Controller
                 'foto3' => $image_name3,
                 'foto4' => $image_name4,
                 'deskripsi' => $request->deskripsi,
-                'jenis' => $request->jenis,
+                'kategori_id' => $request->kategori_id,
                 'latitude' => $request->latitude,
                 'longitude' => $request->longitude,
+                'maps' => $request->maps,
+                'operasional' => $request->operasional,
             ]);
     
             if ($destinasi) {

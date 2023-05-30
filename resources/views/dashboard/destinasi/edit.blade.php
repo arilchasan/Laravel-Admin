@@ -14,10 +14,21 @@
                     <label class="label" for="nama">Nama Wisata</label>
                     <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama',$destinasi->nama) }}" >
                 </div>
-                <div class="col-md-6">
-                    <label class="label" for="jenis">Kategori Wisata</label>
-                    <input type="text" class="form-control" id="jenis" name="jenis" required value="{{ old('jenis',$destinasi->jenis) }}">
-                </div>
+             
+                    <div class="col-md-6 kategori">
+                        <label for="kategori_id" class="form-label">Kategori</label>
+                        <select class="form-select" name="kategori_id" id="kategori_id" >
+                            @foreach ($kategori as $class)
+                                @if(old('kategori_id',$destinasi->kategori_id) == $class->id)
+                                    <option value="{{ $class->id }}" selected>{{ $class->nama }}</option>
+                                @else
+                                <option value="{{ $class->id }}">{{ $class->nama }}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+    
+               
                 <div class="col-md-6">
                     <label class="label" for="latitude">Latitude</label>
                     <input type="text" class="form-control" id="latitude" name="latitude" required value="{{ old('latitude',$destinasi->latitude) }}">
@@ -29,6 +40,10 @@
                 <div class="col-md-12">
                     <label class="label" for="alamat">Lokasi Wisata</label>
                     <input type="text" class="form-control" id="alamat" name="alamat" value="{{ old('alamat',$destinasi->alamat) }}" >
+                </div>
+                <div class="col-md-12">
+                    <label class="label" for="operasional">Jam Operaional</label>
+                    <input type="text" class="form-control" id="operasional" name="operasional" value="{{ old('operasional',$destinasi->operasional) }}" >
                 </div>
                 <div class="col-md-6">
                     <label class="label" for="foto">Foto Wisata</label>
@@ -55,9 +70,14 @@
                     <img src="{{ asset('foto/'.$destinasi->foto4) }}" alt="" width="500"  >
                 </div>
             
-                <div class="col-md-12">
+                <div class="col-md-6">
+                    <label class="label" for="maps">Maps Wisata</label>
+                    <textarea style="height:200px" type="text" class="form-control" id="maps" name="maps" required value="{{ old('maps',$destinasi->maps) }}"> {{ old('maps',$destinasi->maps) }} </textarea>
+                </div>
+
+                <div class="col-md-6">
                     <label class="label" for="deskripsi">Deskripsi Wisata</label>
-                    <textarea type="text" class="form-control" id="deskripsi" name="deskripsi" required value="{{ old('deskripsi',$destinasi->deskripsi) }}"> {{ old('deskripsi',$destinasi->deskripsi) }} </textarea>
+                    <textarea style="height:200px" type="text" class="form-control" id="deskripsi" name="deskripsi" required value="{{ old('deskripsi',$destinasi->deskripsi) }}"> {{ old('deskripsi',$destinasi->deskripsi) }} </textarea>
                 </div>
               
                 <br>
@@ -79,5 +99,14 @@
 <style>
     label{
         margin-top: 15px;
+    }
+    .kategori {
+        display: flex;
+        flex-direction: column;       
+    }
+
+    .kategori select {
+        height: 2.5rem;
+        text-align: center;
     }
 </style>

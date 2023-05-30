@@ -12,7 +12,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="">Kategori</label>
-                    <input type="text" class="form-control" id="" name="" value="{{$destinasi->jenis}}" readonly>
+                    <input type="text" class="form-control" id="" name="" value="{{$destinasi->kategori->nama}}" readonly>
                 </div>
                 <div class="col-md-6">
                     <label for="">Latitude</label>
@@ -23,21 +23,29 @@
                     <input type="text" class="form-control" id="" name="" value="{{$destinasi->longitude}}" readonly>
                 </div>
                 <div class="col-md-12">
+                    <label for="">Jam Operaional</label>
+                    <input type="text" class="form-control" id="" name="" value="{{$destinasi->operasional}}" readonly>
+                </div>               
+                <div class="col-md-12">
                     <label for="">Lokasi</label>
                     <input type="text" class="form-control" id="" name="" value="{{$destinasi->alamat}}" readonly>
                 </div>               
-                <div class="col-md-12">
+                <div class="col-md-6">
+                    <label for="">Maps</label>
+                    <textarea  style="height:200px" type="textarea" class="form-control" id="" name="" value="{{$destinasi->maps}}" readonly>{{$destinasi->maps}} </textarea>
+                </div>
+                <div class="col-md-6">
                     <label for="">Deskripsi</label>
-                    <textarea  type="textarea" class="form-control" id="" name="" value="{{$destinasi->deskripsi}}" readonly>{{$destinasi->deskripsi}} </textarea>
+                    <textarea  style="height:200px" type="textarea" class="form-control" id="" name="" value="{{$destinasi->deskripsi}}" readonly>{{$destinasi->deskripsi}} </textarea>
                 </div>
             
                     <div class="col-md-6">
-                        <label for="">Gambar</label>
+                        <label for="">Foto Wisata 1</label>
                         <br>
                         <img src="{{asset('foto/'.$destinasi->foto)}}" alt="" width="500" class="image">
                     </div>
                     <div class="col-md-6">
-                        <label for="">Gambar</label>
+                        <label for="">Foto Wisata 2</label>
                         <br>
                         <img src="{{asset('foto/'.$destinasi->foto2)}}" alt="" width="500" class="image">
                     </div>
@@ -47,12 +55,12 @@
                         </label>
                     </div>
                     <div class="col-md-6">
-                        <label for="">Gambar</label>
+                        <label for="">Foto Wisata 3</label>
                         <br>
                         <img src="{{asset('foto/'.$destinasi->foto3)}}" alt="" width="500" class="image">
                     </div>
                     <div class="col-md-6">
-                        <label for="">Gambar</label>
+                        <label for="">Foto Wisata 4</label>
                         <br>
                         <img src="{{asset('foto/'.$destinasi->foto4)}}" alt="" width="500" class="image">
                     </div>

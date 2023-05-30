@@ -16,6 +16,7 @@
     </div> --}}
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Poppins:wght@400&display=swap"
         rel="stylesheet">
+        <script src="https://kit.fontawesome.com/76557bdb99.js" crossorigin="anonymous"></script>
         <div class="create-container">
             <div class="content container-fluid">
                 <div class="content-container">
@@ -50,9 +51,9 @@
                         <th>
                             <h5>Nama</h5>
                         </th>
-                        <th>
+                        {{-- <th>
                             <h5>Alamat</h5>
-                        </th>
+                        </th> --}}
                         <th>
                             <h5>Foto</h5>
                         </th>
@@ -66,7 +67,7 @@
                             <h5>Foto 4</h5>
                         </th>
                         <th>
-                            <h5>Jenis</h5>
+                            <h5>Kategori</h5>
                         </th>
                         <th>
                             <h5></h5>
@@ -93,21 +94,21 @@
                             </tr>
                             
                         @endif
-                        <tr class="text-center">
+                        <tr class="text-center" >
                             @foreach ($destinasi as $data)
                                 <th>{{ $data->id }}</li>
                                 <th>{{ $data->nama }}</li>
-                                <th>{{ $data->alamat }}</li>
+                                {{-- <th>{{ $data->alamat }}</li> --}}
                                 <td><img src="{{ asset('foto/' . $data->foto) }}" width="150"></td>
                                 <td><img src="{{ asset('foto/' . $data->foto2) }}" width="150"></td>
                                 <td><img src="{{ asset('foto/' . $data->foto3) }}" width="150"></td>
                                 <td><img src="{{ asset('foto/' . $data->foto4) }}" width="150"></td> 
-                                <th>{{ $data->jenis }}</li>
+                                <th>{{ $data->kategori->nama }}</li>
                                     <td><a type="button" class="btn btn-outline-info"
-                                        href="/dashboard/destinasi/detail/{{ $data->id }}">Detail</a> </td>
+                                        href="/dashboard/destinasi/detail/{{ $data->id }}"><i class="fa fa-info-circle fa-lg"></i></a> </td>
                                 <td>
                                     <a type="button" class="btn btn-outline-success"
-                                        href="/dashboard/destinasi/edit/{{ $data->id }}">Edit</a>
+                                        href="/dashboard/destinasi/edit/{{ $data->id }}"><i class="fa fa-pen"></i></a>
                                 </td>
                                 <td>
                                     <form action="/dashboard/destinasi/destroy/{{ $data->id }}"
@@ -115,7 +116,7 @@
                                         @method('delete')
                                         @csrf
                                         <button class="btn btn-outline-danger"
-                                            onclick="return confirm('Yakin Mau Hapus ?')">Hapus</button>
+                                            onclick="return confirm('Yakin Mau Hapus ?')"><i class="fa fa-reguler fa-trash"></i></button>
                                     </form>
                                 </td>
                         </tr>

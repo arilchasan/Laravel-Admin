@@ -11,10 +11,17 @@
                     <label for="nama">Nama Wisata</label>
                     <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama') }}" placeholder="Masukkan Nama Wisata">
                 </div>
-                <div class="col-md-6">
-                    <label for="jenis">Kategori Wisata</label>
-                    <input type="text" class="form-control" id="jenis" name="jenis" value="{{ old('jenis') }}" placeholder="Masukkan Jenis Wisata">
+                
+                <div class="col-md-6 kategori">
+                    <label for="kategori_id" class="form-label">Kategori</label>
+                    <select class="form-select" name="kategori_id" id="kategori_id" >
+                        <option value="{{ old('kategori_id')}}">  Pilih Jenis Kategori  </option>
+                        @foreach ($kategori as $class)
+                            <option value="{{ $class->id }}">{{ $class->nama }}</option>
+                        @endforeach
+                    </select>
                 </div>
+
                 <div class="col-md-6">
                     <label for="latitude">Latitude</label>
                     <input type="text" class="form-control" id="latitude" name="latitude" value="{{ old('latitude') }}" placeholder="Masukkan Latitude">
@@ -41,12 +48,20 @@
                     <input type="file" class="form-control" id="foto4" name="foto4" value="{{ old('foto4') }}" placeholder="Masukkan Foto Wisata">
                 </div>
                 <div class="col-md-12">
-                    <label for="alamat">Alamat Wisata</label>
-                    <input type="text" class="form-control" id="alamat" name="alamat" value="{{ old('alamat') }}" placeholder="Masukkan Alamat Wisata">
+                    <label for="operasional">Jam Operasional</label>
+                    <input type="text" class="form-control" id="operasional" name="operasional" value="{{ old('operasional') }}" placeholder="Masukkan Jam Operasioanal">
                 </div>
                 <div class="col-md-12">
+                    <label for="alamat">Lokasi Wisata</label>
+                    <textarea type="text" class="form-control" id="alamat" name="alamat" value="{{ old('alamat') }}" placeholder="Masukkan Alamat Wisata"></textarea>
+                </div>
+                <div class="col-md-6">
                     <label for="deskripsi">Deskripsi Wisata</label>
-                    <textarea type="text" class="form-control" id="deskripsi" name="deskripsi" value="{{ old('deskripsi') }}" placeholder="Masukkan Deskripsi Wisata"{{ old('deskripsi') }}> </textarea>
+                    <textarea style="height: 200px" type="text" class="form-control" id="deskripsi" name="deskripsi" value="{{ old('deskripsi') }}" placeholder="Masukkan Deskripsi Wisata"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label for="maps">Maps Wisata</label>
+                    <textarea style="height: 200px" type="text" class="form-control" id="maps" name="maps" value="{{ old('maps') }}" placeholder="Masukkan Maps Wisata"></textarea>
                 </div>
                 <br>
                 <div class="col-md-12 mt-2">
@@ -58,12 +73,19 @@
         </div>
     </div>
 </div>
-
 @endsection
 
 <style>
     label {
         margin-top: 20px;
     }
+    .kategori {
+        display: flex;
+        flex-direction: column;       
+    }
 
+    .kategori select {
+        height: 2.5rem;
+        text-align: center;
+    }
 </style>

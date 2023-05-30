@@ -18,9 +18,11 @@ class Destinasi extends Model
         'foto3',
         'foto4',
         'deskripsi',
-        'jenis',
+        'kategori_id',
         'latitude',
         'longitude',
+        'maps',
+        'operasional',
     ];
 
     protected $hidden = [
@@ -30,5 +32,10 @@ class Destinasi extends Model
     protected $guarded = ['id'];
 
     protected $table = 'destinasis';
+
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class);
+    }
 
 }
