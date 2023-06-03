@@ -9,6 +9,7 @@ use App\Http\Controllers\FormController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PetaController;
 use App\Http\Controllers\DestinasiController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerificationController;
 
 /*
@@ -45,7 +46,7 @@ Route::prefix('dashboard')->group(function () {
     //prefix destinasi
     Route::prefix('/destinasi')->group(function () {
         Route::get('/all', [DestinasiController::class, 'all']);
-        Route::get('/detail/{id}', [DestinasiController::class, 'show']);
+        Route::get('/detail/{id}', [DestinasiController::class, 'detail']);
         Route::get('/create', [DestinasiController::class, 'create']);
         Route::get('/edit/{id}', [DestinasiController::class, 'edit']);
         Route::post('/add', [DestinasiController::class, 'store']);
@@ -53,20 +54,20 @@ Route::prefix('dashboard')->group(function () {
         Route::delete('/destroy/{id}', [DestinasiController::class, 'destroy']);
     });
     //prefix peta
-    Route::prefix('/peta')->group(function () {
-        Route::get('/all', [PetaController::class, 'index']);
-        Route::get('/detail/{id}', [PetaController::class, 'show']);
-        Route::get('/create', [PetaController::class, 'create']);
-        Route::get('/edit/{id}', [PetaController::class, 'edit']);
-        Route::post('/add', [PetaController::class, 'store']);
-        Route::post('/update/{id}', [PetaController::class, 'update']);
-        Route::delete('/destroy/{id}', [PetaController::class, 'destroy']);
-    });
+    // Route::prefix('/peta')->group(function () {
+    //     Route::get('/all', [PetaController::class, 'index']);
+    //     Route::get('/detail/{id}', [PetaController::class, 'show']);
+    //     Route::get('/create', [PetaController::class, 'create']);
+    //     Route::get('/edit/{id}', [PetaController::class, 'edit']);
+    //     Route::post('/add', [PetaController::class, 'store']);
+    //     Route::post('/update/{id}', [PetaController::class, 'update']);
+    //     Route::delete('/destroy/{id}', [PetaController::class, 'destroy']);
+    // });
 
     //prefix userlogin
     Route::prefix('/userlogin')->group( function(){
-        Route::get('/all', [AuthController::class, 'userall']);
-        Route::delete('/destroy/{id}', [AuthController::class, 'destroy']);
+        Route::get('/all', [UserController::class, 'userall']);
+        Route::delete('/destroy/{id}', [UserController::class, 'destroy']);
     });
 });
 

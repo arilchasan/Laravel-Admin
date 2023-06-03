@@ -26,11 +26,11 @@
                                         <h5>Email</h5>
                                     </th>
                                     <th>
-                                        <h5>Password</h5>
+                                        <h5>Avatar</h5>
                                     </th>
-                                    <th>
+                                    {{-- <th>
                                         <h5>Email Verified at</h5>
-                                    </th>
+                                    </th> --}}
                                     <th>
                                         <h5>Opsi</h5>
                                     </th>
@@ -45,10 +45,10 @@
                                         <tr class="text-center">
                                             @foreach ($user as $data)
                                                 <th>{{ $data->id }}</th>
-                                                <th>{{ $data->nama }}</th>
+                                                <th>{{ $data->name }}</th>
                                                 <th>{{ $data->email }}</th>
-                                                <th>{{ $data->password }}</th>
-                                                <th>{{ $data->email_verified_at }}</th>
+                                                <th><img src="{{ asset('/assets/img/avatar/' . $data->avatar)}}"></th>
+                                                {{-- <th>{{ $data->email_verified_at }}</th> --}}
                                                 <th>
                                                     <form action="/dashboard/userlogin/destroy/{{ $data->id }}"
                                                         method="post">

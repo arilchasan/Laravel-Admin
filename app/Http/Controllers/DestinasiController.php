@@ -120,8 +120,7 @@ class DestinasiController extends Controller
 
     public function show($id)
     {
-        return view('dashboard.destinasi.detail', ['destinasi' => Destinasi::find($id)], ['kategori' => Kategori::all()]);
-        $destinasi = Destinasi::find($id);
+        $destinasi = Destinasi::with('kategori')->find($id);
         if ($destinasi) {
             return response()->json([
                 'status' => 200,
@@ -135,6 +134,11 @@ class DestinasiController extends Controller
                 'data' => $destinasi
             ], 404);
         }
+    }
+
+    public function detail($id)
+    {
+        return view('dashboard.destinasi.detail', ['destinasi' => Destinasi::find($id)], ['kategori' => Kategori::all()]);
     }
 
     public function edit($id) 
