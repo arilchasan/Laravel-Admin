@@ -22,12 +22,14 @@ return new class extends Migration
             $table->string('foto3');
             $table->string('foto4');
             $table->text('deskripsi');
-            $table->string('kategori_id');            
+            $table->string('kategori_id');
+            $table->string('wilayah_id');
+            $table->string('status');            
             $table->decimal('latitude', 10, 8);
             $table->decimal('longitude', 11, 8);
             $table->text('maps');
-            $table->string('operasional');
-            
+            $table->string('pelayanan');
+            $table->string('operasional');            
             $table->timestamps();
         });
     }

@@ -9,7 +9,7 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <h3 class="text-center" style="margin-top: 30px;font-weight:bold">Daftar User Login</h3>
-                            <table class="table table-success table-striped text-left ">
+                            <table class="table table-success table-striped text-center ">
                                 @if (session()->has('success'))
                                     <div class="alert alert-success col-lg-12" role="alert">
                                         {{ session('success') }}
@@ -31,9 +31,9 @@
                                     {{-- <th>
                                         <h5>Email Verified at</h5>
                                     </th> --}}
-                                    <th>
+                                    {{-- <th>
                                         <h5>Opsi</h5>
-                                    </th>
+                                    </th> --}}
 
                                 </tr>
                                 </thead>
@@ -47,9 +47,9 @@
                                                 <th>{{ $data->id }}</th>
                                                 <th>{{ $data->name }}</th>
                                                 <th>{{ $data->email }}</th>
-                                                <th><img src="{{ asset('/assets/img/avatar/' . $data->avatar)}}"></th>
+                                                <th><img src="{{ asset('/assets/img/avatar/' . $data->avatar)}}" width="80px"></th>
                                                 {{-- <th>{{ $data->email_verified_at }}</th> --}}
-                                                <th>
+                                                {{-- <th>
                                                     <form action="/dashboard/userlogin/destroy/{{ $data->id }}"
                                                         method="post">
                                                         @method('delete')
@@ -57,7 +57,7 @@
                                                         <button class="btn btn-outline-danger"
                                                             onclick="return confirm('Yakin Mau Hapus ?')">Hapus</button>
                                                     </form>
-                                                </th>
+                                                </th> --}}
 
                                         </tr>
                                     @endforeach

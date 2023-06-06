@@ -22,6 +22,20 @@
                     </select>
                 </div>
 
+                <div class="col-md-6 kategori">
+                    <label for="wilayah_id" class="form-label">Kategori</label>
+                    <select class="form-select" name="wilayah_id" id="wilayah_id" >
+                        <option value="{{ old('wilayah_id')}}">  Pilih Wilayah  </option>
+                        @foreach ($wilayah as $class)
+                            <option value="{{ $class->id }}">{{ $class->nama }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="status">Status</label>
+                    <input type="text" class="form-control" id="status" name="status" value="{{ old('status') }}" placeholder="Masukkan Status (true/false)">
+                </div>
                 <div class="col-md-6">
                     <label for="latitude">Latitude</label>
                     <input type="text" class="form-control" id="latitude" name="latitude" value="{{ old('latitude') }}" placeholder="Masukkan Latitude">
@@ -47,9 +61,13 @@
                     <label for="foto4">Foto Wisata 4</label>
                     <input type="file" class="form-control" id="foto4" name="foto4" value="{{ old('foto4') }}" placeholder="Masukkan Foto Wisata">
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <label for="operasional">Jam Operasional</label>
                     <input type="text" class="form-control" id="operasional" name="operasional" value="{{ old('operasional') }}" placeholder="Masukkan Jam Operasioanal">
+                </div>
+                <div class="col-md-6">
+                    <label for="pelayanan">Jam Pelayanan</label>
+                    <input type="text" class="form-control" id="operasional" name="pelayanan" value="{{ old('pelayanan') }}" placeholder="Masukkan Jam Pelayanan Tiket">
                 </div>
                 <div class="col-md-12">
                     <label for="alamat">Lokasi Wisata</label>

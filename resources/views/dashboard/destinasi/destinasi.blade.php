@@ -26,7 +26,7 @@
                 <h3 class="text-center" style="margin-top: 30px;font-weight:bold">Daftar Destinasi Wisata</h3>
 
 
-                <table class="table table-danger table-striped text-left ">
+                <table class="table table-warning table-striped text-center ">
                     @if (session()->has('success'))
                         <div class="alert alert-success col-lg-12" role="alert">
                             {{ session('success') }}

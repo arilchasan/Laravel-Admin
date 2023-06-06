@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Wilayah;
 use App\Models\Kategori;
 use App\Models\Destinasi;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use GuzzleHttp\Promise\Create;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -18,7 +20,7 @@ class DestinasiController extends Controller
     public function index()
     {
 
-        $destinasi = Destinasi::with('kategori')->get();
+        $destinasi = Destinasi::with(['kategori','wilayah'])->get();
         if ($destinasi->count() > 0) {
             return response()->json([
                 'status' => 200,
@@ -39,7 +41,7 @@ class DestinasiController extends Controller
     }
     public function create()
     {
-        return view('/dashboard/destinasi/create',['kategori' => Kategori::all()]);
+        return view('/dashboard/destinasi/create',['kategori' => Kategori::all(),'wilayah' => Wilayah::all()]);
     }
 
     public function store(Request $request)
@@ -57,6 +59,9 @@ class DestinasiController extends Controller
             'longitude' => 'required',
             'maps' => 'required',
             'operasional' => 'required',
+            'status' => 'required',
+            'wilayah_id' => 'required',
+            'pelayanan' => 'required'
            
         ]);
         if ($validator->fails()) {
@@ -97,22 +102,31 @@ class DestinasiController extends Controller
                 'longitude' => $request->longitude,
                 'maps' => $request->maps,
                 'operasional' => $request->operasional,
+                'status' => $request->status,
+                'wilayah_id' => $request->wilayah_id,
+                'pelayanan' => $request->pelayanan
                 
             ]);
             if ($destinasi) {
-                return redirect('/dashboard/destinasi/all')->with('success', 'Berhasil menambahkan data');
-                return response()->json([
-                    'status' => 200,
-                    'message' => 'Berhasil menambahkan data',
-                    'data' => $destinasi                    
-                ], 200);
+                if($request->wantsJson()) {
+                    return response()->json([
+                        'status' => 200,
+                        'message' => 'Berhasil menambahkan data',
+                        'data' => $destinasi                    
+                    ], 200);
+                } else {
+                    return redirect('/dashboard/destinasi/all')->with('success', 'Berhasil menambahkan data');
+                }
             } else {
-                return redirect('/dashboard/destinasi/all')->with('error', 'Gagal menambahkan data');
-                return response()->json([
-                    'status' => 400,
-                    'message' => 'Gagal menambahkan data',
-                    'data' => $destinasi
-                ], 400);
+                if($request->wantsJson()){
+                    return response()->json([
+                        'status' => 400,
+                        'message' => 'Gagal menambahkan data',
+                        'data' => $destinasi
+                    ], 400);
+                } else {
+                    return redirect('/dashboard/destinasi/all')->with('error', 'Gagal menambahkan data');
+                }
             }
         }
         Destinasi::create($validator);
@@ -143,7 +157,7 @@ class DestinasiController extends Controller
 
     public function edit($id) 
     {
-        return view('dashboard.destinasi.edit', ['destinasi' => Destinasi::find($id)], ['kategori' => Kategori::all()]);
+        return view('dashboard.destinasi.edit', ['destinasi' => Destinasi::find($id)], ['kategori' => Kategori::all(),'wilayah' => Wilayah::all()]);
     }
 
     public function update(int $id, Request $request)
@@ -161,6 +175,9 @@ class DestinasiController extends Controller
             'longitude' => 'required',
             'maps' => 'required',
             'operasional' => 'required',
+            'status' => 'required',
+            'wilayah_id' => 'required',
+            'pelayanan' => 'required'
             
         ]);
     
@@ -228,48 +245,105 @@ class DestinasiController extends Controller
                 'longitude' => $request->longitude,
                 'maps' => $request->maps,
                 'operasional' => $request->operasional,
+                'status' => $request->status,
+                'wilayah_id' => $request->wilayah_id,
+                'pelayanan' => $request->pelayanan
             ]);
     
             if ($destinasi) {
-                return redirect('/dashboard/destinasi/all')->with('success', 'Berhasil mengupdate data');
-                return response()->json([
-                    'status' => 200,
-                    'message' => 'Berhasil mengupdate data',
-                    'data' => $destinasi
-                ], 200);
+                if($request->wantsJson()){
+                    return response()->json([
+                        'status' => 200,
+                        'message' => 'Berhasil mengupdate data',
+                        'data' => $destinasi
+                    ], 200);
+                } else {
+                    return redirect('/dashboard/destinasi/all')->with('success', 'Berhasil mengupdate data');
+                }
             } else {
+                if($request->wantsJson()){
+                    return response()->json([
+                        'status' => 400,
+                        'message' => 'Gagal mengupdate data',
+                        'data' => $destinasi
+                    ], 400);
+                } else {
                 return redirect('/dashboard/destinasi/all')->with('error', 'Gagal mengupdate data');
-                return response()->json([
-                    'status' => 400,
-                    'message' => 'Gagal mengupdate data',
-                    'data' => $destinasi
-                ], 400);
+                }      
             }
         }
     }
     
 
-    public function destroy($id) 
+    public function destroy($id , Request $request) 
     {
         $destinasi = Destinasi::find($id);  
         if (!$destinasi) {
-            return redirect('/dashboard/destinasi/all')->with('error', 'Data tidak ditemukan');
-            return response()->json([
-                'status' => 404,
-                'message' => 'Data tidak ditemukan',
-            ], 404);
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'Data tidak ditemukan',
+                ], 404);
+            } else {
+                return redirect('/dashboard/destinasi/all')->with('error', 'Data tidak ditemukan');
+            }
+            
+            
         } else {
             File::delete(public_path('foto/' . $destinasi->foto));
             File::delete(public_path('foto/' . $destinasi->foto2));
             File::delete(public_path('foto/' . $destinasi->foto3));
             File::delete(public_path('foto/' . $destinasi->foto4));
             $destinasi->delete();
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Berhasil menghapus data',
+                    'data' => $destinasi
+                ], 200);
+            } else {
             return redirect('/dashboard/destinasi/all')->with('success', 'Berhasil menghapus data');
-            return response()->json([
-                'status' => 200,
-                'message' => 'Berhasil menghapus data',
-                'data' => $destinasi
-            ], 200);
+            }
+            
         }
+    }
+
+    //function search 
+    public function search(Request $request)
+    {
+        // Menerima parameter pencarian dan penyaringan dari permintaan
+        $searchTerm = $request->input('search');
+        $kategori = $request->input('kategori');
+        $wilayah = $request->input('wilayah');
+
+        // Query database dengan menggunakan parameter pencarian dan penyaringan
+        $query = Destinasi::query()->with('kategori')->with('wilayah');
+
+        if ($searchTerm) {
+            $query->where('nama', 'LIKE', "%$searchTerm%");
+        }
+
+        if ($kategori) {
+            $query->whereHas('kategori', function ($query) use ($kategori) {
+                $query->where('nama', $kategori);
+            });
+        }
+
+        if ($wilayah) {
+            $query->whereHas('wilayah', function ($query) use ($wilayah) {
+                $query->where('nama', $wilayah);
+            });
+        }
+
+        $results = $query->get();
+
+            if($results) {
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Berhasil menampilkan data',
+                    'data' => $results
+                ], 200);
+            } 
+            
     }
 }

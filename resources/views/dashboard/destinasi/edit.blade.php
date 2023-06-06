@@ -27,7 +27,24 @@
                             @endforeach
                         </select>
                     </div>
-    
+                    
+                    <div class="col-md-6 wilayah">
+                        <label for="wilayah_id" class="form-label">Kategori</label>
+                        <select class="form-select" name="wilayah_id" id="wilayah_id" >
+                            @foreach ($wilayah as $class)
+                                @if(old('wilayah_id',$destinasi->wilayah_id) == $class->id)
+                                    <option value="{{ $class->id }}" selected>{{ $class->nama }}</option>
+                                @else
+                                <option value="{{ $class->id }}">{{ $class->nama }}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+               
+                <div class="col-md-6">
+                    <label class="label" for="status">Status</label>
+                    <input type="text" class="form-control" id="status" name="status" required value="{{ old('status',$destinasi->status) }}">
+                </div>
                
                 <div class="col-md-6">
                     <label class="label" for="latitude">Latitude</label>
@@ -37,39 +54,50 @@
                     <label class="label" for="longitude">Longitude</label>
                     <input type="text" class="form-control" id="longitude" name="longitude" required value="{{ old('longitude',$destinasi->longitude) }}">
                 </div>
+                <div class="col-md-6">
+                    <label class="label" for="operasional">Jam Operasional</label>
+                    <input type="text" class="form-control" id="operasional" name="operasional" value="{{ old('operasional',$destinasi->operasional) }}" >
+                </div>
+                <div class="col-md-6">
+                    <label class="label" for="pelayanan">Jam Pelayanan Tiket</label>
+                    <input type="text" class="form-control" id="pelayanan" name="pelayanan" value="{{ old('pelayanan',$destinasi->pelayanan) }}" >
+                </div>
                 <div class="col-md-12">
                     <label class="label" for="alamat">Lokasi Wisata</label>
                     <input type="text" class="form-control" id="alamat" name="alamat" value="{{ old('alamat',$destinasi->alamat) }}" >
                 </div>
-                <div class="col-md-12">
-                    <label class="label" for="operasional">Jam Operaional</label>
-                    <input type="text" class="form-control" id="operasional" name="operasional" value="{{ old('operasional',$destinasi->operasional) }}" >
+                <div class="col-md-6">
+                    <label class="label" for="foto">Foto Wisata</label>
+                    <input type="file" class="form-control" id="foto" name="foto" required>
+                    <br>
+                    @if($destinasi->foto)
+                        <img src="{{ asset('foto/'.$destinasi->foto) }}" alt="" width="500">
+                    @endif
                 </div>
                 <div class="col-md-6">
                     <label class="label" for="foto">Foto Wisata</label>
-                    <input type="file" class="form-control" id="foto" name="foto" required value="{{ old('foto',$destinasi->foto) }}">
+                    <input type="file" class="form-control" id="foto2" name="foto2" required>
                     <br>
-                    <img src="{{ asset('foto/'.$destinasi->foto) }}" alt="" width="500"  >
+                    @if($destinasi->foto2)
+                        <img src="{{ asset('foto/'.$destinasi->foto2) }}" alt="" width="500">
+                    @endif
                 </div>
                 <div class="col-md-6">
-                    <label class="label" for="foto2">Foto Wisata</label>
-                    <input type="file" class="form-control" id="foto2" name="foto2" required value="{{ old('foto2',$destinasi->foto2) }}">
+                    <label class="label" for="foto">Foto Wisata</label>
+                    <input type="file" class="form-control" id="foto3" name="foto3" required>
                     <br>
-                    <img src="{{ asset('foto/'.$destinasi->foto2) }}" alt="" width="500"  >
+                    @if($destinasi->foto3)
+                        <img src="{{ asset('foto/'.$destinasi->foto3) }}" alt="" width="500">
+                    @endif
                 </div>
                 <div class="col-md-6">
-                    <label class="label" for="foto3">Foto Wisata</label>
-                    <input type="file" class="form-control" id="foto3" name="foto3" required value="{{ old('foto3',$destinasi->foto3) }}">
+                    <label class="label" for="foto">Foto Wisata</label>
+                    <input type="file" class="form-control" id="foto4" name="foto4" required>
                     <br>
-                    <img src="{{ asset('foto/'.$destinasi->foto3) }}" alt="" width="500"  >
+                    @if($destinasi->foto4)
+                        <img src="{{ asset('foto/'.$destinasi->foto4) }}" alt="" width="500">
+                    @endif
                 </div>
-                <div class="col-md-6">
-                    <label class="label" for="foto4">Foto Wisata</label>
-                    <input type="file" class="form-control" id="foto4" name="foto4" required value="{{ old('foto4',$destinasi->foto4) }}">
-                    <br>
-                    <img src="{{ asset('foto/'.$destinasi->foto4) }}" alt="" width="500"  >
-                </div>
-            
                 <div class="col-md-6">
                     <label class="label" for="maps">Maps Wisata</label>
                     <textarea style="height:200px" type="text" class="form-control" id="maps" name="maps" required value="{{ old('maps',$destinasi->maps) }}"> {{ old('maps',$destinasi->maps) }} </textarea>
@@ -106,6 +134,15 @@
     }
 
     .kategori select {
+        height: 2.5rem;
+        text-align: center;
+    }
+    .wilayah {
+        display: flex;
+        flex-direction: column;       
+    }
+
+    .wilayah select {
         height: 2.5rem;
         text-align: center;
     }

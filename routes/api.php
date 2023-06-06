@@ -36,6 +36,7 @@ Route::get('/destinasi/{id}', [DestinasiController::class, 'show']);
 Route::post('/destinasi', [DestinasiController::class, 'store']);
 Route::post('/destinasi/{id}', [DestinasiController::class, 'update']);
 Route::delete('/destinasi/{id}', [DestinasiController::class, 'destroy']);
+Route::get('/destinasi', [DestinasiController::class, 'search']);
 
 Route::get('email/verify/{id}', [VerificationController::class, 'verify'])->name('verification.verify');
 Route::post('email/send', [VerificationController::class, 'sendVerificationEmail'])->name('verification.send');

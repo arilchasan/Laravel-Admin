@@ -15,6 +15,10 @@
                     <input type="text" class="form-control" id="" name="" value="{{$destinasi->kategori->nama}}" readonly>
                 </div>
                 <div class="col-md-6">
+                    <label for="">Wilayah</label>
+                    <input type="text" class="form-control" id="" name="" value="{{$destinasi->wilayah->nama}}" readonly>
+                </div>
+                <div class="col-md-6">
                     <label for="">Latitude</label>
                     <input type="text" class="form-control" id="" name="" value="{{$destinasi->latitude}}" readonly>
                 </div>
@@ -22,9 +26,13 @@
                     <label for="">Longitude</label>
                     <input type="text" class="form-control" id="" name="" value="{{$destinasi->longitude}}" readonly>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <label for="">Jam Operaional</label>
                     <input type="text" class="form-control" id="" name="" value="{{$destinasi->operasional}}" readonly>
+                </div>               
+                <div class="col-md-6">
+                    <label for="">Jam Pelayanan Tiket</label>
+                    <input type="text" class="form-control" id="" name="" value="{{$destinasi->pelayanan}}" readonly>
                 </div>               
                 <div class="col-md-12">
                     <label for="">Lokasi</label>
