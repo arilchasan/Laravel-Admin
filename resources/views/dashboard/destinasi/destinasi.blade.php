@@ -111,8 +111,7 @@
                                         href="/dashboard/destinasi/edit/{{ $data->id }}"><i class="fa fa-pen"></i></a>
                                 </td>
                                 <td>
-                                    <form action="/dashboard/destinasi/destroy/{{ $data->id }}"
-                                        method="post">
+                                    <form action="/dashboard/destinasi/destroy/{{ $data->id }}"method="post">
                                         @method('delete')
                                         @csrf
                                         <button class="btn btn-outline-danger"
