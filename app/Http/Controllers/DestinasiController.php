@@ -65,12 +65,15 @@ class DestinasiController extends Controller
            
         ]);
         if ($validator->fails()) {
-            return redirect('/dashboard/destinasi/all')->with('error', 'Terjadi kesalahan');
-            return response()->json([
-                'status' => 400,
-                'message' => 'Terjadi kesalahan',
-                'data' => $validator->errors()
-            ], 400);
+            if($request->wantsJson()){
+                return response()->json([
+                    'status' => 400,
+                    'message' => 'Terjadi kesalahan',
+                    'data' => $validator->errors()
+                ], 400);
+            } else {
+                return redirect('/dashboard/destinasi/create')->with('error', 'Terjadi kesalahan');
+            }
         } else {
             $image = $request->file('foto');
             $image_name = Str::random(10) . '.' . $image->getClientOriginalExtension();

@@ -38,9 +38,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    {{-- <div class="col-lg-7">
-                <a  class="btn btn-outline-primary" href="/dashboard/create">Tambah Data</a>
-            </div> --}}
+
                                     @if ($user->count())
                                         <tr class="text-center">
                                             @foreach ($user as $data)

@@ -22,7 +22,7 @@
                     <label class="label" for="harga">harga</label>
                     <input type="text" class="form-control" id="harga" name="harga"  value="{{ old('harga',$kuliner->harga) }}">
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <label class="label" for="foto">Foto Wisata</label>
                     <input type="file" class="form-control" id="foto" name="foto"  value="{{ old('foto',$kuliner->foto) }}">
                     <br>
@@ -45,7 +45,7 @@
                 <div class="col-md-12 mt-2">
                     
                     <button type="submit" class="btn btn-primary">Submit</button>
-                    <a href="/dashboard/destinasi/all" type="button" class="btn btn-secondary mx-2" >Kembali</a>
+                    <a href="/dashboard/kuliner/all" type="button" class="btn btn-secondary mx-2" >Kembali</a>
 
                 </div>
             </form>
@@ -68,5 +68,11 @@
     .kategori select {
         height: 2.5rem;
         text-align: center;
+    }
+    label{
+        margin-top: 20px
+    }
+    .image{
+        border: 1px solid #000000;
     }
 </style>

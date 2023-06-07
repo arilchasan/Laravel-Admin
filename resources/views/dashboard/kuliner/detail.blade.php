@@ -4,7 +4,7 @@
 <div class="create-container">
     <div class="content container-fluid">
         <div class="content-container">
-                <h1 align="center">Tambah Data Kuliner</h1>
+                <h1 align="center">Detail Data Kuliner</h1>
                 <form action="/dashboard/kuliner/add" method="post" enctype="multipart/form-data" class="row g-3">
                 @csrf
                 <div class="col-md-6">
@@ -15,7 +15,7 @@
                     <label for="latitude">Deskripsi</label>
                     <input type="text" class="form-control" id="deskripsi" name="deskripsi" value="{{ $kuliner->deskripsi }}" readonly>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <label for="longitude">Harga</label>
                     <input type="text" class="form-control" id="harga" name="harga" value="{{ $kuliner->harga }}" readonly>
                 </div>
@@ -28,11 +28,6 @@
                     <label for="">Foto Kuliner</label>
                     <br>
                     <img src="{{asset('foto/'.$kuliner->foto2)}}" alt="" width="300" class="image">
-                </div>
-                <div class="col-md-12">
-                    <label>
-                        
-                    </label>
                 </div>
                 <div class="col-md-6">
                     <label for="">Foto Kuliner</label>
@@ -49,4 +44,12 @@
         </div>
     </div>
 </div>
+<style>
+    label{
+        margin-top: 20px
+    }
+    .image{
+        border: 1px solid #000000;
+    }
+</style>
 @endsection

@@ -9,7 +9,10 @@ use Illuminate\Support\Facades\Storage;
 class Kuliner extends Model
 {
     use HasFactory;
+    
+    protected $guarded = ['id'];
 
+    protected $table = 'kuliner';
     protected $fillable = [
         'nama_kuliner',
         'deskripsi',
@@ -22,7 +25,4 @@ class Kuliner extends Model
         'created_at',
         'updated_at'
     ];
-    protected $guarded = ['id'];
-
-    protected $table = 'kuliner';
 }

@@ -64,7 +64,14 @@
                             <h5>Foto 3</h5>
                         </th>
                         <th>
+
+                        </th>
+                        <th>
                             <h5>Opsi</h5>
+                            
+                        </th>
+                        <th>
+                            
                         </th>
                     </tr>
                     </thead>
@@ -80,14 +87,14 @@
                                     <td>{{ $data->nama_kuliner }}</td>
                                     <td>{{ $data->deskripsi }}</td>
                                     <td>{{ $data->harga }}</td>
-                                    <td><img src="{{ asset('foto/' . $data->foto) }}" alt="" width="100px"></td>
-                                    <td><img src="{{ asset('foto/' . $data->foto2) }}" alt="" width="100px"></td>
-                                    <td><img src="{{ asset('foto/' . $data->foto3) }}" alt="" width="100px"></td>
-                                    <td>
-                                        <a href="/dashboard/kuliner/edit/{{ $data->id }}" class="btn btn-outline-success">Edit</a>
-                                    </td>
+                                    <td><img src="{{ asset('kuliner/' . $data->foto) }}" alt="" width="100px"></td>
+                                    <td><img src="{{ asset('kuliner/' . $data->foto2) }}" alt="" width="100px"></td>
+                                    <td><img src="{{ asset('kuliner/' . $data->foto3) }}" alt="" width="100px"></td>
                                     <td>
                                         <a href="/dashboard/kuliner/detail/{{ $data->id }}" class="btn btn-outline-info">Detail</a>
+                                    </td>
+                                    <td>
+                                        <a href="/dashboard/kuliner/edit/{{ $data->id }}" class="btn btn-outline-success">Edit</a>
                                     </td>
                                         <td>
                                             <form action="/dashboard/kuliner/destroy/{{ $data->id }}" method="post">

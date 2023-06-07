@@ -4,8 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PetaController;
-use App\Http\Controllers\DestinasiController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\KulinerController;
+use App\Http\Controllers\DestinasiController;
 use App\Http\Controllers\VerificationController;
 
 /*
@@ -28,6 +29,7 @@ Route::post('/auth/register', [AuthController::class, 'register']);
 Route::post('/auth/logout', [AuthController::class, 'logout']);
 Route::delete('/auth/delete/{id}',[UserController::class,'destroy']);
 Route::get('/auth/user', [UserController::class, 'index']);
+Route::put('/auth/user/block/{id}',[UserController::class,'block']);    
 
 Route::post('/auth/user/{id}',[UserController::class,'store']);
 
@@ -40,6 +42,14 @@ Route::get('/destinasi', [DestinasiController::class, 'search']);
 
 Route::get('email/verify/{id}', [VerificationController::class, 'verify'])->name('verification.verify');
 Route::post('email/send', [VerificationController::class, 'sendVerificationEmail'])->name('verification.send');
+
+//kuliner
+Route::get('/kuliner',[KulinerController::class,'index']);
+Route::get('/kuliner/{id}',[KulinerController::class,'show']);
+Route::post('/kuliner',[KulinerController::class,'store']);
+Route::post('/kuliner/{id}',[KulinerController::class,'update']);
+Route::delete('/kuliner/{id}',[KulinerController::class,'destroy']);
+
 
 // Route::get('/peta',[PetaController::class,'get']);
 // Route::post('/peta',[PetaController::class,'store']);
