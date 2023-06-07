@@ -43,7 +43,6 @@
                 <div class="col-md-12 mt-2">
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <a href="/dashboard/kuliner/all" type="button" class="btn btn-secondary mx-2" >Kembali</a>
-
                 </div>
             </form>
         </div>
