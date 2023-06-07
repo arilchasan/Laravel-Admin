@@ -117,7 +117,6 @@ class DestinasiController extends Controller
         }
         Destinasi::create($validator);
     }
-
     public function show($id)
     {
         $destinasi = Destinasi::with('kategori')->find($id);
@@ -248,7 +247,6 @@ class DestinasiController extends Controller
         }
     }
     
-
     public function destroy($id) 
     {
         $destinasi = Destinasi::find($id);  

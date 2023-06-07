@@ -14,7 +14,6 @@
                     <label class="label" for="nama">Nama Wisata</label>
                     <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama',$destinasi->nama) }}" >
                 </div>
-             
                     <div class="col-md-6 kategori">
                         <label for="kategori_id" class="form-label">Kategori</label>
                         <select class="form-select" name="kategori_id" id="kategori_id" >
@@ -27,8 +26,6 @@
                             @endforeach
                         </select>
                     </div>
-    
-               
                 <div class="col-md-6">
                     <label class="label" for="latitude">Latitude</label>
                     <input type="text" class="form-control" id="latitude" name="latitude" required value="{{ old('latitude',$destinasi->latitude) }}">
