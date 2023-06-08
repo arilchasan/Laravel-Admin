@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Wilayah;
 use App\Models\Kategori;
+use App\Models\Komentar;
 use App\Models\Destinasi;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -11,6 +12,8 @@ use GuzzleHttp\Promise\Create;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Resources\KomentarResource;
+use App\Http\Resources\DestinasiResource;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\DestinasiStoreRequest;
 
@@ -20,12 +23,12 @@ class DestinasiController extends Controller
     public function index()
     {
 
-        $destinasi = Destinasi::with(['kategori','wilayah'])->get();
+        $destinasi = Destinasi::with(['kategori', 'wilayah','komentars.user'])->get();
         if ($destinasi->count() > 0) {
             return response()->json([
                 'status' => 200,
                 'message' => 'Berhasil menampilkan data',
-                'data' => $destinasi
+                'data' => DestinasiResource::collection($destinasi)
             ], 200);
         } else {
             return response()->json([
@@ -37,11 +40,11 @@ class DestinasiController extends Controller
     }
     public function all()
     {
-        return view ('/dashboard/destinasi/destinasi',['destinasi' => Destinasi::all()]);    
+        return view('/dashboard/destinasi/destinasi', ['destinasi' => Destinasi::all()]);
     }
     public function create()
     {
-        return view('/dashboard/destinasi/create',['kategori' => Kategori::all(),'wilayah' => Wilayah::all()]);
+        return view('/dashboard/destinasi/create', ['kategori' => Kategori::all(), 'wilayah' => Wilayah::all()]);
     }
 
     public function store(Request $request)
@@ -62,10 +65,10 @@ class DestinasiController extends Controller
             'status' => 'required',
             'wilayah_id' => 'required',
             'pelayanan' => 'required'
-           
+
         ]);
         if ($validator->fails()) {
-            if($request->wantsJson()){
+            if ($request->wantsJson()) {
                 return response()->json([
                     'status' => 400,
                     'message' => 'Terjadi kesalahan',
@@ -108,20 +111,20 @@ class DestinasiController extends Controller
                 'status' => $request->status,
                 'wilayah_id' => $request->wilayah_id,
                 'pelayanan' => $request->pelayanan
-                
+
             ]);
             if ($destinasi) {
-                if($request->wantsJson()) {
+                if ($request->wantsJson()) {
                     return response()->json([
                         'status' => 200,
                         'message' => 'Berhasil menambahkan data',
-                        'data' => $destinasi                    
+                        'data' => $destinasi
                     ], 200);
                 } else {
                     return redirect('/dashboard/destinasi/all')->with('success', 'Berhasil menambahkan data');
                 }
             } else {
-                if($request->wantsJson()){
+                if ($request->wantsJson()) {
                     return response()->json([
                         'status' => 400,
                         'message' => 'Gagal menambahkan data',
@@ -137,12 +140,13 @@ class DestinasiController extends Controller
 
     public function show($id)
     {
-        $destinasi = Destinasi::with('kategori')->find($id);
+        $destinasi = Destinasi::with(['kategori','komentars.user'])->find($id);
+        // $destinasi->load('komentars.user');
         if ($destinasi) {
             return response()->json([
                 'status' => 200,
                 'message' => 'Berhasil menampilkan data',
-                'data' => $destinasi
+                'data' => new DestinasiResource($destinasi)
             ], 200);
         } else {
             return response()->json([
@@ -158,9 +162,9 @@ class DestinasiController extends Controller
         return view('dashboard.destinasi.detail', ['destinasi' => Destinasi::find($id)], ['kategori' => Kategori::all()]);
     }
 
-    public function edit($id) 
+    public function edit($id)
     {
-        return view('dashboard.destinasi.edit', ['destinasi' => Destinasi::find($id)], ['kategori' => Kategori::all(),'wilayah' => Wilayah::all()]);
+        return view('dashboard.destinasi.edit', ['destinasi' => Destinasi::find($id)], ['kategori' => Kategori::all(), 'wilayah' => Wilayah::all()]);
     }
 
     public function update(int $id, Request $request)
@@ -181,9 +185,9 @@ class DestinasiController extends Controller
             'status' => 'required',
             'wilayah_id' => 'required',
             'pelayanan' => 'required'
-            
+
         ]);
-    
+
         if ($validator->fails()) {
             return response()->json([
                 'status' => 400,
@@ -192,20 +196,20 @@ class DestinasiController extends Controller
             ], 400);
         } else {
             $destinasi = Destinasi::find($id);
-    
+
             if (!$destinasi) {
                 return response()->json([
                     'status' => 404,
                     'message' => 'Data tidak ditemukan',
                 ], 404);
             }
-    
+
             // hapus foto lama
             File::delete(public_path('foto/' . $destinasi->foto));
             File::delete(public_path('foto/' . $destinasi->foto2));
             File::delete(public_path('foto/' . $destinasi->foto3));
             File::delete(public_path('foto/' . $destinasi->foto4));
-    
+
             // upload foto baru jika ada
             $image_name = $destinasi->foto;
             if ($request->hasFile('foto')) {
@@ -252,9 +256,9 @@ class DestinasiController extends Controller
                 'wilayah_id' => $request->wilayah_id,
                 'pelayanan' => $request->pelayanan
             ]);
-    
+
             if ($destinasi) {
-                if($request->wantsJson()){
+                if ($request->wantsJson()) {
                     return response()->json([
                         'status' => 200,
                         'message' => 'Berhasil mengupdate data',
@@ -264,23 +268,23 @@ class DestinasiController extends Controller
                     return redirect('/dashboard/destinasi/all')->with('success', 'Berhasil mengupdate data');
                 }
             } else {
-                if($request->wantsJson()){
+                if ($request->wantsJson()) {
                     return response()->json([
                         'status' => 400,
                         'message' => 'Gagal mengupdate data',
                         'data' => $destinasi
                     ], 400);
                 } else {
-                return redirect('/dashboard/destinasi/all')->with('error', 'Gagal mengupdate data');
-                }      
+                    return redirect('/dashboard/destinasi/all')->with('error', 'Gagal mengupdate data');
+                }
             }
         }
     }
-    
 
-    public function destroy($id , Request $request) 
+
+    public function destroy($id, Request $request)
     {
-        $destinasi = Destinasi::find($id);  
+        $destinasi = Destinasi::find($id);
         if (!$destinasi) {
             if ($request->wantsJson()) {
                 return response()->json([
@@ -290,8 +294,6 @@ class DestinasiController extends Controller
             } else {
                 return redirect('/dashboard/destinasi/all')->with('error', 'Data tidak ditemukan');
             }
-            
-            
         } else {
             File::delete(public_path('foto/' . $destinasi->foto));
             File::delete(public_path('foto/' . $destinasi->foto2));
@@ -305,9 +307,8 @@ class DestinasiController extends Controller
                     'data' => $destinasi
                 ], 200);
             } else {
-            return redirect('/dashboard/destinasi/all')->with('success', 'Berhasil menghapus data');
+                return redirect('/dashboard/destinasi/all')->with('success', 'Berhasil menghapus data');
             }
-            
         }
     }
 
@@ -340,13 +341,44 @@ class DestinasiController extends Controller
 
         $results = $query->get();
 
-            if($results) {
-                return response()->json([
-                    'status' => 200,
-                    'message' => 'Berhasil menampilkan data',
-                    'data' => $results
-                ], 200);
-            } 
+        if ($results) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Berhasil menampilkan data',
+                'data' => $results
+            ], 200);
+        }
+    }
+
+    public function komentar($id, Request $request)
+    {
+        if($request->wantsJson()){   
+        $destinasi = Destinasi::findOrFail($id);
+
+        $komentars = Komentar::with('user', 'destinasi')->where('destinasi_id',$id)->get();
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'Berhasil menampilkan Komentar',
+            'data' => KomentarResource::collection($komentars),
+        ]);
+        } else {
+            $komentars = Komentar::with('user', 'destinasi')->where('destinasi_id',$id)->get();
             
+            return view('dashboard.destinasi.komentar', ['komentar' => $komentars = KomentarResource::collection($komentars),]);
+        }
+    }
+    //show all comments in destinasi
+    public function showComment($id)
+    {
+        $destinasi = Destinasi::findOrFail($id);
+
+        $komentars = Komentar::with('user', 'destinasi')->get();
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'Berhasil menampilkan Komentar',
+            'data' => KomentarResource::collection($komentars),
+        ]);
     }
 }
