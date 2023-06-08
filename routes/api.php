@@ -7,6 +7,7 @@ use App\Http\Controllers\PetaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\KulinerController;
 use App\Http\Controllers\DestinasiController;
+use App\Http\Controllers\KomentarController;
 use App\Http\Controllers\VerificationController;
 
 /*
@@ -50,6 +51,10 @@ Route::post('/kuliner',[KulinerController::class,'store']);
 Route::post('/kuliner/{id}',[KulinerController::class,'update']);
 Route::delete('/kuliner/{id}',[KulinerController::class,'destroy']);
 
+Route::post('/destinasi/komentar/{id}',[KomentarController::class,'store'])->middleware('auth:sanctum');
+Route::get('/destinasi/komentar/{id}', [DestinasiController::class, 'komentar']);
+Route::get('/destinasi/komentar/', [DestinasiController::class, 'showComment']);
+Route::delete('/destinasi/komentar/{id}',[KomentarController::class,'destroy'])->middleware('auth:sanctum');
 
 // Route::get('/peta',[PetaController::class,'get']);
 // Route::post('/peta',[PetaController::class,'store']);

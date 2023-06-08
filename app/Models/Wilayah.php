@@ -14,6 +14,11 @@ class Wilayah extends Model
         'nama',
     ];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at'
+    ];
+
     public function destinasi()
     {
         return $this->hasMany(Destinasi::class,'wilayah_id');

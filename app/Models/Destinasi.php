@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Komentar;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Destinasi extends Model
 {
@@ -46,4 +47,13 @@ class Destinasi extends Model
         return $this->belongsTo(Wilayah::class);
     }
 
+    public function komentars()
+    {
+        return $this->hasMany(Komentar::class);
+    }
+    
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

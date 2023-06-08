@@ -11,7 +11,9 @@ use App\Http\Controllers\PetaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\KulinerController;
 use App\Http\Controllers\DestinasiController;
+use App\Http\Controllers\KomentarController;
 use App\Http\Controllers\VerificationController;
+use App\Http\Resources\KomentarResource;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +55,8 @@ Route::prefix('dashboard')->group(function () {
         Route::post('/add', [DestinasiController::class, 'store']);
         Route::post('/update/{id}', [DestinasiController::class, 'update']);
         Route::delete('/destroy/{id}', [DestinasiController::class, 'destroy']);
+        Route::get('/komentar/{id}', [DestinasiController::class, 'komentar']);
+        Route::delete('/komentar/{id}', [KomentarController::class, 'destroy']);
     });
     Route::prefix('/kuliner')->group(function(){
         Route::get('/all', [KulinerController::class, 'all']);
