@@ -53,6 +53,12 @@ class AuthController extends Controller
             ], 401);
         }
 
+        if ($user->status) {
+            return response()->json([
+                'message' => 'Pengguna diblokir!'
+            ], 401);
+        }
+
         if(!Hash::check($request->password, $user->password)){
             return response()->json([
                 'message' => 'Password salah!'

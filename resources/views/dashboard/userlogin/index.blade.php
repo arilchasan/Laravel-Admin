@@ -10,11 +10,16 @@
                         <div class="table-responsive">
                             <h3 class="text-center" style="margin-top: 30px;font-weight:bold">Daftar User Login</h3>
                             <table class="table table-success table-striped text-center ">
+
                                 @if (session()->has('success'))
-                                    <div class="alert alert-success col-lg-12" role="alert">
-                                        {{ session('success') }}
-                                    </div>
-                                @endif
+                                <div class="alert alert-success col-lg-12" role="alert">
+                                    {{ session('success') }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            @endif
+
                                 <tr class="text-center">
                                     <th>
                                         <h5>ID</h5>
@@ -31,9 +36,9 @@
                                     {{-- <th>
                                         <h5>Email Verified at</h5>
                                     </th> --}}
-                                    {{-- <th>
+                                    <th>
                                         <h5>Opsi</h5>
-                                    </th> --}}
+                                    </th>
 
                                 </tr>
                                 </thead>
@@ -45,17 +50,22 @@
                                                 <th>{{ $data->id }}</th>
                                                 <th>{{ $data->name }}</th>
                                                 <th>{{ $data->email }}</th>
-                                                <th><img src="{{ asset('/assets/img/avatar/' . $data->avatar)}}" width="80px"></th>
+                                                <th><img src="{{ asset('/assets/img/avatar/' . $data->avatar) }}"
+                                                        width="80px"></th>
                                                 {{-- <th>{{ $data->email_verified_at }}</th> --}}
-                                                {{-- <th>
-                                                    <form action="/dashboard/userlogin/destroy/{{ $data->id }}"
-                                                        method="post">
-                                                        @method('delete')
-                                                        @csrf
-                                                        <button class="btn btn-outline-danger"
-                                                            onclick="return confirm('Yakin Mau Hapus ?')">Hapus</button>
-                                                    </form>
-                                                </th> --}}
+                                                <th>
+                                                    @if ($data->status)
+                                                        <form action="/api/auth/user/unblock/{{ $data->id }}" method="POST">
+                                                            @csrf
+                                                            <button type="submit" class="btn btn-outline-danger">Unban User</button>
+                                                        </form>
+                                                    @else
+                                                        <form action="/api/auth/user/block/{{ $data->id }}" method="POST">
+                                                            @csrf
+                                                            <button type="submit" class="btn btn-outline-danger">Ban User</button>
+                                                        </form>
+                                                    @endif
+                                                </th>
 
                                         </tr>
                                     @endforeach
@@ -74,7 +84,4 @@
             </div>
         </div>
     </div>
-
-    {{-- {{ $data->links('pagination::bootstrap-5')}}  --}}
-
 @endsection

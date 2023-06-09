@@ -10,12 +10,13 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    public function userall() 
+    public function userall()
     {
-        return view('dashboard.userlogin.index',['user' => User::all()]);
+        return view('dashboard.userlogin.index', ['user' => User::all()]);
     }
 
-    public function index(){
+    public function index()
+    {
         $users = User::all();
         if ($users->count() > 0) {
             return response()->json([
@@ -31,33 +32,33 @@ class UserController extends Controller
         }
     }
 
-    public function destroy($id) 
+    public function destroy($id, Request $re)
     {
-        $user = User::find($id);  
+        $user = User::find($id);
         if (!$user) {
-            
-            if($user->wantJson()) {
+            if ($re->expectsJson()) {
                 return response()->json([
                     'status' => 404,
                     'message' => 'Data tidak ditemukan',
                 ], 404);
+            } else {
+                return redirect('/dashboard/userlogin/all')->with('error', 'Data tidak ditemukan');
             }
-            return redirect()->to('/dashboard/userlogin/all')->with('error', 'Data tidak ditemukan');
-            
         } else {
-            if($user->wantJson()){
+            if ($re->expectsJson()) {
                 $user->delete();
                 return response()->json([
                     'status' => 200,
                     'message' => 'Berhasil menghapus data',
                     'data' => $user
                 ], 200);
-            }     
-            return redirect()->to('/dashboard/userlogin/all')->with('success', 'Berhasil menghapus data');
+            } else {
+                return redirect('/dashboard/userlogin/all')->with('success', 'Berhasil menghapus data');
+            }
         }
     }
 
-    public function store(int $id , Request $request)
+    public function store(int $id, Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
@@ -73,29 +74,70 @@ class UserController extends Controller
                     'message' => 'Data tidak ditemukan',
                 ], 404);
             }
-        if ($request->hasFile('avatar')) {
-            $avatar = $request->file('avatar');
-            $avatarName = Str::Random(10) . '_' . $avatar->getClientOriginalName();
-            $avatar->move(public_path('assets/img/avatar'), $avatarName);
-            Storage::put('/public/assets/img/avatar', $avatarName);;
-        }
-        $user->update([
-            'name' => $request->name,
-            'avatar' => $avatarName,           
-        ]);
-        if($user){
-            return response()->json([
-                'status' => 200,
-                'message' => 'Berhasil mengupdate data',
-                'data' => $user
-            ], 200);
-        } else {
-            return response()->json([
-                'status' => 400,
-                'message' => 'Gagal mengupdate data',
-            ], 400);
+            if ($request->hasFile('avatar')) {
+                $avatar = $request->file('avatar');
+                $avatarName = Str::Random(10) . '_' . $avatar->getClientOriginalName();
+                $avatar->move(public_path('assets/img/avatar'), $avatarName);
+                Storage::put('/public/assets/img/avatar', $avatarName);;
+            }
+            $user->update([
+                'name' => $request->name,
+                'avatar' => $avatarName,
+            ]);
+            if ($user) {
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Berhasil mengupdate data',
+                    'data' => $user
+                ], 200);
+            } else {
+                return response()->json([
+                    'status' => 400,
+                    'message' => 'Gagal mengupdate data',
+                ], 400);
+            }
         }
     }
-}
 
+    public function blockUser(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        if (!$user) {
+            return response()->json([
+                'message' => 'Pengguna tidak ditemukan!'
+            ], 404);
+        }
+
+        $user->status = true;
+        $user->save();
+        if($request->wantsJson()){
+            return response()->json([
+                'message' => 'Pengguna berhasil diblokir!'
+            ], 200);
+        } else {
+            return redirect('dashboard/userlogin/all')->with('success', 'Pengguna berhasil diblokir!');
+        }
+    }
+
+    public function unblockUser(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        if (!$user) {
+            return response()->json([
+                'message' => 'Pengguna tidak ditemukan!'
+            ], 404);
+        }
+
+        $user->status = false;
+        $user->save();
+        if($request->wantsJson()){
+            return response()->json([
+                'message' => 'Pengguna berhasil di-unblock!'
+            ], 200);
+        } else {
+            return redirect('dashboard/userlogin/all')->with('success', 'Pengguna berhasil diblokir!');
+        }
+    }
 }

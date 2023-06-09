@@ -27,10 +27,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //login-register
 Route::post('/auth/login', [AuthController::class, 'login']);
 Route::post('/auth/register', [AuthController::class, 'register']);
-Route::post('/auth/logout', [AuthController::class, 'logout']);
+Route::post('/auth/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::delete('/auth/delete/{id}',[UserController::class,'destroy']);
 Route::get('/auth/user', [UserController::class, 'index']);
-Route::put('/auth/user/block/{id}',[UserController::class,'block']);    
+Route::post('/auth/user/block/{id}',[UserController::class,'blockUser']);    
+Route::post('/auth/user/unblock/{id}',[UserController::class,'unblockUser']);    
 
 Route::post('/auth/user/{id}',[UserController::class,'store']);
 
