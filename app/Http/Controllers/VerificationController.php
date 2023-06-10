@@ -24,7 +24,6 @@ class VerificationController extends Controller
                 'message' => 'Verifikasi gagal!'
             ], 400);
         }
-
         $user = User::findOrFail($id);
         if (!$user->hasVerifiedEmail()) {
             $user->markEmailAsVerified();

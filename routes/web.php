@@ -11,7 +11,11 @@ use App\Http\Controllers\PetaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\KulinerController;
 use App\Http\Controllers\DestinasiController;
+use App\Http\Controllers\WishlistController;
+
+
 use App\Http\Controllers\VerificationController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -65,6 +69,12 @@ Route::prefix('dashboard')->group(function () {
 
         
     });
+    Route::prefix('/wishlist')->group(function () {
+        Route::get('/all', [WishlistController::class, 'all']);
+        Route::get('/add/{destinasi}', [WishlistController::class, 'addToWishlist']);
+        Route::get('/remove/{destinasi}', [WishlistController::class, 'removeFromWishlist']);
+    });
+
     //prefix peta
     // Route::prefix('/peta')->group(function () {
     //     Route::get('/all', [PetaController::class, 'index']);

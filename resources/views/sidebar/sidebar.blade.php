@@ -21,6 +21,9 @@
                 <li class="submenu">
                     <li><a href='/dashboard/userlogin/all'><i class="la la-user"></i> <span> User Login</span></a></li>    
                 </li>
+                <li class="submenu">
+                    <li><a href="/dashboard/wishlist/all"><i class="la la-wishlist"></i> <span>Wishlist</span></a></li>
+                </li>
 
                 
             </ul>
