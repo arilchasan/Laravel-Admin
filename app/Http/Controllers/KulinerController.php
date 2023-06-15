@@ -52,6 +52,7 @@ class KulinerController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'nama_warung' => 'required', //nama kolom tabel 'required' => 'required
             'nama_kuliner' => 'required',
             'deskripsi' => 'required',
             'harga' => 'required',
@@ -80,6 +81,7 @@ class KulinerController extends Controller
             $image3->move(public_path('/foto'), $image_name3);
 
             $kuliner = Kuliner::create([
+                'nama_warung' => $request->input('nama_warung'),
                 'nama_kuliner' => $request->input('nama_kuliner'),
                 'deskripsi' => $request->input('deskripsi'),
                 'harga' => $request->input('harga'),
@@ -128,6 +130,7 @@ class KulinerController extends Controller
         public function update(int $id, Request $request)
         {
             $validator = Validator::make($request->all(), [
+                'nama_warung' => 'required',
                 'nama_kuliner' => 'required',
                 'deskripsi' => 'required',
                 'harga' => 'required',
@@ -178,6 +181,7 @@ class KulinerController extends Controller
                     $image3->move(public_path('/foto'), $image_name3);
                 }
                 $kuliner->update([
+                    'nama_warung' => $request->nama_warung,
                     'nama_kuliner' => $request->nama_kuliner,
                     'deskripsi' => $request->deskripsi,
                     'harga' => $request->harga,
