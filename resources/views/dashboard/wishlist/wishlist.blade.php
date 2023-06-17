@@ -49,11 +49,10 @@
                             <h5>ID</h5>
                         </th>
                         <th>
+                            <h5>Nama</h5>
+                        <th>
                             <h5>Wisata</h5>
                         </th>
-                        
-
-
                     </tr>
                     </thead>
                     <br>

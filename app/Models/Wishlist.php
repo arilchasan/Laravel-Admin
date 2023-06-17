@@ -2,14 +2,19 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Destinasi;
+use App\Models\User;
 
 class Wishlist extends Model
 {
     use HasFactory;
 
     protected $fillabel = [
+        'id',
         'user_id',
         'destinasi_id',
     ];
@@ -35,5 +40,8 @@ class Wishlist extends Model
         return $this->belongsToMany(Wishlist::class);
     }
 
+    protected $guarded = ['id'];
+
+    protected $table = 'wishlist';
 
 }

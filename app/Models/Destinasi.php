@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Kategori;
+use App\Models\Wishlist;
+use App\Models\User;
 
 class Destinasi extends Model
 {
@@ -37,5 +40,14 @@ class Destinasi extends Model
     {
         return $this->belongsTo(Kategori::class);
     }
+    public function wishlist()
+    {
+        return $this->belongsToMany(Wishlist::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    
 
 }
